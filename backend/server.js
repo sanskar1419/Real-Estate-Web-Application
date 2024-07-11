@@ -1,0 +1,6 @@
+import app from "./index.js";
+
+const PORT = 8000;
+app.listen(PORT, () => {
+  console.log(`Server is listening to Port :: ${PORT}`);
+});

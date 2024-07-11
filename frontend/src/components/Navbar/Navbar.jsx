@@ -42,7 +42,7 @@ export default function Navbar() {
           <div className="dropdown dropdown-end md:hidden">
             <div tabIndex={0} role="button" className="">
               <div className="flex items-center justify-self-center btn btn-circle ">
-                <IoReorderThreeOutline className="w-10 avatar" size={60} />
+                <IoReorderThreeOutline className="w-10 avatar" size={50} />
               </div>
             </div>
             <ul

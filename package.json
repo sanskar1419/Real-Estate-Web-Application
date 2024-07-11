@@ -1,0 +1,16 @@
+{
+  "name": "real_estate_mern_application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "author": "Sanskar Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
