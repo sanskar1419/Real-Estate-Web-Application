@@ -6,7 +6,7 @@ export default class AuthController {
     this.authRepository = new AuthRepository();
   }
 
-  async signUp(req, res) {
+  async signUp(req, res, next) {
     try {
       const { username, email, password } = req.body;
       const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -19,9 +19,7 @@ export default class AuthController {
       res.status(201).json(newUser);
     } catch (error) {
       console.log(error);
-      res.status(500).json({
-        error: "Internal Server Error",
-      });
+      next(error);
     }
   }
 }
