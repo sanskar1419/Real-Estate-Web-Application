@@ -6,7 +6,7 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 export default function Navbar() {
   return (
     <>
-      <header className="shadow-md bg-black text-white p-3 md:p-1">
+      <header className="bg-black text-white p-3 shadow-lg shadow-green-500/50">
         <div className="flex justify-between items-center max-w-6xl mx-auto px-2 pl-3 pr-3">
           <Link to="/">
             <h1 className="font-bold text-xl flex flex-wrap">
@@ -14,7 +14,7 @@ export default function Navbar() {
               <span className="text-green-500">Dwell</span>
             </h1>
           </Link>
-          <form className="m-2 p-2 rounded-xl hidden md:flex items-center border-gray-400 border-solid border-2">
+          {/* <form className="m-2 p-2 rounded-xl hidden md:flex items-center border-gray-400 border-solid border-2">
             <input
               type="text"
               placeholder="Search..."
@@ -23,7 +23,7 @@ export default function Navbar() {
             <button>
               <FaSearch className="text-sky-100 ml-3" />
             </button>
-          </form>
+          </form> */}
           <ul className="gap-6 hidden md:flex">
             <Link to="/">
               <li className="hidden sm:inline text-sky-100 hover:underline">

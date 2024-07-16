@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import About from "./pages/About/About";
 import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -44,6 +45,24 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <div>
+        <Toaster
+          position="bottom-right"
+          reverseOrder={true}
+          toastOptions={{
+            success: {
+              style: {
+                minWidth: "400px",
+              },
+            },
+            error: {
+              style: {
+                minWidth: "400px",
+              },
+            },
+          }}
+        />
+      </div>
     </>
   );
 }

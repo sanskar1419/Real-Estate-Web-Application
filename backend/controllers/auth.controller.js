@@ -8,7 +8,7 @@ export default class AuthController {
 
   async signUp(req, res, next) {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, confirmPassword } = req.body;
       const hashedPassword = bcryptjs.hashSync(password, 10);
       const newUser = await this.authRepository.add({
         username,
@@ -16,7 +16,7 @@ export default class AuthController {
         password: hashedPassword,
       });
 
-      res.status(201).json(newUser);
+      res.status(201).json("User Registered Successfully");
     } catch (error) {
       console.log(error);
       next(error);
