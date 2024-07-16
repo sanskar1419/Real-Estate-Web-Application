@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 
@@ -8,12 +8,12 @@ export default function Navbar() {
     <>
       <header className="bg-black text-white p-3 shadow-lg shadow-green-500/50">
         <div className="flex justify-between items-center max-w-6xl mx-auto px-2 pl-3 pr-3">
-          <Link to="/">
+          <NavLink to="/">
             <h1 className="font-bold text-xl flex flex-wrap">
               <span className="text-sky-100">Dream</span>
               <span className="text-green-500">Dwell</span>
             </h1>
-          </Link>
+          </NavLink>
           {/* <form className="m-2 p-2 rounded-xl hidden md:flex items-center border-gray-400 border-solid border-2">
             <input
               type="text"
@@ -25,19 +25,30 @@ export default function Navbar() {
             </button>
           </form> */}
           <ul className="gap-6 hidden md:flex">
-            <Link to="/">
-              <li className="hidden sm:inline text-sky-100 hover:underline">
-                Home
-              </li>
-            </Link>
-            <Link to="/about">
-              <li className="hidden sm:inline text-sky-100 hover:underline">
-                About
-              </li>
-            </Link>
-            <Link to="/sign-in">
-              <li className=" text-sky-100 hover:underline"> Sign in</li>
-            </Link>
+            <NavLink
+              to="/"
+              style={({ isActive }) =>
+                isActive ? { color: "#22c55e" } : { color: "white" }
+              }
+            >
+              <li className="hidden sm:inline hover:underline">Home</li>
+            </NavLink>
+            <NavLink
+              to="/about"
+              style={({ isActive }) =>
+                isActive ? { color: "#22c55e" } : { color: "white" }
+              }
+            >
+              <li className="hidden sm:inline  hover:underline">About</li>
+            </NavLink>
+            <NavLink
+              to="/sign-in"
+              style={({ isActive }) =>
+                isActive ? { color: "#22c55e" } : { color: "white" }
+              }
+            >
+              <li className=" hover:underline"> Sign in</li>
+            </NavLink>
           </ul>
           <div className="dropdown dropdown-end md:hidden">
             <div tabIndex={0} role="button" className="">
@@ -50,19 +61,34 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow text-sky-100"
             >
               <li>
-                <Link to="/">
+                <NavLink
+                  to="/"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#22c55e" } : { color: "white" }
+                  }
+                >
                   <a className="justify-between">Home</a>
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/about">
+                <NavLink
+                  to="/about"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#22c55e" } : { color: "white" }
+                  }
+                >
                   <a>About</a>
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/sign-in">
+                <NavLink
+                  to="/sign-in"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#22c55e" } : { color: "white" }
+                  }
+                >
                   <a>Sign In</a>
-                </Link>
+                </NavLink>
               </li>
               <li>
                 <input
