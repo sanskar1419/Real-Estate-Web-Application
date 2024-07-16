@@ -9,4 +9,13 @@ export default class AuthRepository {
       console.log(error);
     }
   }
+
+  async findByEmail(email) {
+    try {
+      const user = await User.findOne({ email });
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
