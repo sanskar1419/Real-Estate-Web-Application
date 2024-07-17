@@ -10,7 +10,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import About from "./pages/About/About";
 import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
+import Notification from "./components/Notifications/Notification.jsx";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -45,38 +45,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <div>
-        <Toaster
-          position="bottom-right"
-          reverseOrder={true}
-          toastOptions={{
-            success: {
-              style: {
-                minWidth: "400px",
-              },
-            },
-            error: {
-              style: {
-                minWidth: "400px",
-              },
-            },
-          }}
-        >
-          {(t) => (
-            <ToastBar toast={t}>
-              {({ icon, message }) => (
-                <>
-                  {icon}
-                  {message}
-                  {t.type !== "loading" && (
-                    <button onClick={() => toast.dismiss(t.id)}>X</button>
-                  )}
-                </>
-              )}
-            </ToastBar>
-          )}
-        </Toaster>
-      </div>
+      <Notification />
     </>
   );
 }
