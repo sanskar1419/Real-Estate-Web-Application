@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import PropagateLoader from "react-spinners/PropagateLoader";
+import { userActions } from "../../redux/slices/user.slice.js";
+import {
+  getError,
+  getMessage,
+  notificationAction,
+} from "../../redux/slices/notification.slice.js";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const error = useSelector(getError);
+  const message = useSelector(getMessage);
+
+  console.log("Message : ", message);
+  console.log("Error : ", error);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -14,10 +27,21 @@ export default function SignIn() {
     });
   };
 
+  useEffect(() => {
+    if (message != null) {
+      toast.success(message);
+      dispatch(notificationAction.resetMessage());
+    }
+    if (error != null) {
+      toast.error(error);
+      dispatch(notificationAction.resetError());
+    }
+  }, [message, error]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(userActions.signInStart());
       const res = await fetch("/api/auth/sign-in", {
         method: "POST",
         headers: {
@@ -27,18 +51,13 @@ export default function SignIn() {
       });
       const data = await res.json();
       if (data.success === false) {
-        setLoading(false);
-        toast.error(data.message, { duration: 4000 });
+        dispatch(userActions.signInError(data.message));
         return;
       }
-      setLoading(false);
-      toast.success("Signed In Successfully");
+      dispatch(userActions.signInSuccess(data));
       navigate("/");
     } catch (error) {
-      setLoading(false);
-      toast.error(error.message, {
-        duration: 4000,
-      });
+      dispatch(userActions.signInError(error.message));
     }
   };
   return (
