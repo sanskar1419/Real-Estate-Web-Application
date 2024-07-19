@@ -3,7 +3,10 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { userActions } from "../../redux/slices/user.slice.js";
+import {
+  getUserLoadingState,
+  userActions,
+} from "../../redux/slices/user.slice.js";
 import {
   getError,
   getMessage,
@@ -12,7 +15,7 @@ import {
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const userLoading = useSelector(getUserLoadingState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector(getError);
@@ -82,7 +85,7 @@ export default function SignIn() {
         />
 
         <button className="text-white p-2 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 btn btn-success bg-green-500">
-          {loading ? <PropagateLoader color="#050505" /> : "Sign In"}
+          {userLoading ? <PropagateLoader color="#050505" /> : "Sign In"}
         </button>
       </form>
       <div className="flex gap-2 mt-5">

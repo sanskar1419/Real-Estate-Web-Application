@@ -24,3 +24,5 @@ export const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 export const userActions = userSlice.actions;
+
+export const getUserLoadingState = (state) => state.user.loading;
