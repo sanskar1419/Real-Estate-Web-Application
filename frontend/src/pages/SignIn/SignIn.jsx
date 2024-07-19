@@ -18,8 +18,7 @@ export default function SignIn() {
   const error = useSelector(getError);
   const message = useSelector(getMessage);
 
-  console.log("Message : ", message);
-  console.log("Error : ", error);
+  /* Handling Form Data Changes */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -55,6 +54,7 @@ export default function SignIn() {
         return;
       }
       dispatch(userActions.signInSuccess(data));
+      localStorage.setItem("logged-in-user", JSON.stringify(data));
       navigate("/");
     } catch (error) {
       dispatch(userActions.signInError(error.message));
