@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import eye from "../../assets/images/eye.png";
 import hidden from "../../assets/images/hidden.png";
 
-export default function PasswordInput({ handleChange }) {
+export default function PasswordInput({ handleChange, placeholder }) {
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordClick = () => {
     setShowPassword(!showPassword);
@@ -12,7 +12,7 @@ export default function PasswordInput({ handleChange }) {
       <label className=" relative">
         <input
           type={showPassword ? "text" : "password"}
-          placeholder="Password"
+          placeholder={placeholder}
           className="p-2 rounded-lg w-full placeholder: italic bg-slate-950 border border-gray-700 pr-8"
           id="password"
           required

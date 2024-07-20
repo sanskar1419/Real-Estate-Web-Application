@@ -115,7 +115,7 @@ export default function SignIn() {
               />
             </label>
           </div>
-          <PasswordInput handleChange={handleChange} />
+          <PasswordInput handleChange={handleChange} placeholder="Password" />
           <div className="flex gap-2 mt-1 items-end justify-end w-full text-xs">
             <p>Don't have a account?</p>
             <Link to={"/sign-up"}>
