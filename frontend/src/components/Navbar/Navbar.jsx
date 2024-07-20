@@ -52,13 +52,13 @@ export default function Navbar() {
           </ul>
           <div className="dropdown dropdown-end md:hidden">
             <div tabIndex={0} role="button" className="">
-              <div className="flex items-center justify-self-center btn btn-circle ">
+              <div className="flex items-center justify-self-center btn btn-circle bg-slate-900 hover:bg-slate-700">
                 <IoReorderThreeOutline className="w-10 avatar" size={50} />
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-black rounded-box z-[1] mt-3 w-52 p-2 shadow text-sky-100"
+              className="menu menu-xs dropdown-content bg-slate-950 rounded-tr-box z-[1] mt-3 w-52 p-2 shadow text-sky-100"
             >
               <li>
                 <NavLink
@@ -94,7 +94,7 @@ export default function Navbar() {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="bg-transparent focus:outline-none focus:border-sky-100 text-white"
+                  className="bg-slate-900 focus:border-sky-100 text-white mt-3 placeholder:italic"
                 />
               </li>
             </ul>
