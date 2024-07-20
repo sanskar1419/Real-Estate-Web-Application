@@ -49,7 +49,7 @@ export default function OAuth() {
   const handleFacebookClick = () => {};
   const handleTwitterClick = () => {};
   return (
-    <div className=" w-full flex items-center gap-5 justify-center mt-2">
+    <div className=" w-full flex items-center gap-5 justify-center mt-2 mb-3">
       <OAuthIcon socialIcon={googleIcon} handleClick={handleGoogleClick} />
       <OAuthIcon socialIcon={facebookIcon} handleClick={handleFacebookClick} />
       <OAuthIcon socialIcon={twitterIcon} handleClick={handleTwitterClick} />

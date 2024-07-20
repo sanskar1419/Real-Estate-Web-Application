@@ -68,23 +68,29 @@ export default function SignIn() {
     }
   };
   return (
-    <div className=" w-full min-h-[85vh] sm:min-h-[90vh] relative shadow-2xl shadow-black-100 flex items-center justify-center">
+    <div className=" w-full min-h-[85vh] relative shadow-2xl shadow-black-100 flex items-center justify-center flex-col sm:min-h-[90vh] lg:flex-row ">
       <div className=" bg-[url('assets/images/background.jpg')] opacity-20 bg-cover w-full h-full absolute z-[-10]"></div>
-      <div className=" w-[50%] p-12">
-        <div className=" uppercase font-bold text-sm mb-3 w-full">
+      <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
+        <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">
           Make your holiday special
         </div>
-        <div className=" font-extrabold text-3xl mb-3 w-full">
+        <div className=" font-extrabold text-3xl mb-3 w-full ">
           Unleash the traveller{" "}
           <span className=" text-green-500">inside you</span>, Enjoy your dream
           vacation
         </div>
-        <img alt="Sign In" src={signInImage} className=" w-[60%]" />
-        <div className=" text-xs w-full">
+        <div className="w-full flex items-center justify-center lg:justify-start">
+          <img
+            alt="Sign In"
+            src={signInImage}
+            className=" w-[90%] lg:w-[60%]"
+          />
+        </div>
+        <div className=" text-[0.7rem] sm:text-xs flex justify-center lg:justify-start w-full">
           Get started with one of the best travel destination
         </div>
       </div>
-      <div className="w-[50%] p-12 flex justify-center items-center flex-col">
+      <div className="w-[90%] lg:w-[50%] sm:w-[70%] lg:p-12 flex justify-center items-center flex-col">
         <h1 className="text-3xl text-center font-semibold mb-5">Sign In</h1>
         <form
           onSubmit={handleSubmit}
