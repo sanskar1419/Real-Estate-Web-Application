@@ -6,7 +6,7 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 export default function Navbar() {
   return (
     <>
-      <header className="bg-black text-white p-3 shadow-lg shadow-green-500/50">
+      <header className=" text-white p-2 bg-slate-950">
         <div className="flex justify-between items-center max-w-6xl mx-auto px-2 pl-3 pr-3">
           <NavLink to="/">
             <h1 className="font-bold text-xl flex flex-wrap">
