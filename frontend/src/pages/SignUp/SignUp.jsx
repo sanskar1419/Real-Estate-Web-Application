@@ -70,9 +70,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className=" w-full min-h-[85vh] relative shadow-2xl shadow-black-100 flex items-center justify-center flex-col sm:min-h-[90vh] lg:flex-row ">
-      <div className=" bg-[url('assets/images/background.jpg')] opacity-20 bg-cover w-full h-full absolute z-[-10]"></div>
-      <div className=" p-8 flex-col lg:w-[50%] lg:p-12 ">
+    <div className=" w-full min-h-[85vh] h-[85vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar">
+      <div className=" bg-[url('assets/images/background.jpg')] opacity-20 bg-cover w-full min-h-full absolute z-[-10]"></div>
+      <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
         <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">
           Make your holiday special
         </div>
@@ -85,7 +85,7 @@ export default function SignUp() {
           <img
             alt="Sign Up"
             src={signUpImage}
-            className=" w-[90%] lg:w-[60%]"
+            className=" w-[90%] sm:w-[60%]"
           />
         </div>
         <div className=" text-[0.7rem] sm:text-xs flex justify-center lg:justify-start w-full">
