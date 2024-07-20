@@ -40,4 +40,13 @@ export default class AuthController {
       next(error);
     }
   }
+
+  async googleOAuth(req, res, next) {
+    try {
+      console.log(res.body);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }

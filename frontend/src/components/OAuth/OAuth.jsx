@@ -45,11 +45,14 @@ export default function OAuth() {
       console.log("could not sign in with google", error);
     }
   };
+
+  const handleFacebookClick = () => {};
+  const handleTwitterClick = () => {};
   return (
     <div className=" w-full flex items-center gap-5 justify-center mt-2">
-      <OAuthIcon socialIcon={googleIcon} />
-      <OAuthIcon socialIcon={facebookIcon} />
-      <OAuthIcon socialIcon={twitterIcon} />
+      <OAuthIcon socialIcon={googleIcon} handleClick={handleGoogleClick} />
+      <OAuthIcon socialIcon={facebookIcon} handleClick={handleFacebookClick} />
+      <OAuthIcon socialIcon={twitterIcon} handleClick={handleTwitterClick} />
     </div>
   );
 }
