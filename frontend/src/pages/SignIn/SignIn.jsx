@@ -67,6 +67,8 @@ export default function SignIn() {
       dispatch(userActions.signInError(error.message));
     }
   };
+
+  /* Returning the JSX */
   return (
     <div className=" w-full min-h-[85vh] relative shadow-2xl shadow-black-100 flex items-center justify-center flex-col sm:min-h-[90vh] lg:flex-row ">
       <div className=" bg-[url('assets/images/background.jpg')] opacity-20 bg-cover w-full h-full absolute z-[-10]"></div>
@@ -130,38 +132,3 @@ export default function SignIn() {
     </div>
   );
 }
-
-/* 
- <div className="p-1 max-w-xs mx-auto">
-        <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="border p-2 rounded-lg"
-            id="email"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            placeholder="Password"
-            className="border p-2 rounded-lg"
-            id="password"
-            required
-            onChange={handleChange}
-          />
-
-          <button className="text-white p-2 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 btn btn-success bg-green-500">
-            {userLoading ? <PropagateLoader color="#050505" /> : "Sign In"}
-          </button>
-          <OAuth />
-        </form>
-        <div className="flex gap-2 mt-5">
-          <p>Don't have a account?</p>
-          <Link to={"/sign-up"}>
-            <span className="text-green-500">Sign Up</span>
-          </Link>
-        </div>
-      </div>
-*/
