@@ -43,9 +43,29 @@ export default class AuthController {
 
   async googleOAuth(req, res, next) {
     try {
-      console.log(req.body);
+      const user = await this.authRepository.findByEmail(req.body.email);
+      if (user) {
+        generateTokenAndSetCookie(user._id, res);
+        const { password: pass, ...rest } = user._doc;
+        res.status(200).json(rest);
+      } else {
+        const generatedPassword =
+          Math.random().toString(36).slice(-8) +
+          Math.random().toString(36).slice(-8);
+        const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+        const newUser = await this.authRepository.add({
+          username:
+            req.body.name.split(" ").join("").toLowerCase() +
+            Math.random().toString(36).slice(-4),
+          password: hashedPassword,
+          email: req.body.email,
+          avatar: req.body.photo,
+        });
+        generateTokenAndSetCookie(newUser._id, res);
+        const { password: pass, ...rest } = newUser._doc;
+        res.status(200).json(rest);
+      }
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

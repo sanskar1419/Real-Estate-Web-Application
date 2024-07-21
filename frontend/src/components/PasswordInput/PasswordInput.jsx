@@ -14,7 +14,7 @@ export default function PasswordInput({ handleChange, placeholder }) {
           type={showPassword ? "text" : "password"}
           placeholder={placeholder}
           className="p-2 rounded-lg w-full placeholder: italic bg-slate-950 border border-gray-700 pr-8"
-          id="password"
+          id={placeholder.split(" ").join("").toLowerCase()}
           required
           onChange={handleChange}
         />
