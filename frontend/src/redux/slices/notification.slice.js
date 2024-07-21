@@ -16,6 +16,12 @@ const notificationSlice = createSlice({
     resetError: (state, action) => {
       state.error = null;
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setMessage: (state, action) => {
+      state.message = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
