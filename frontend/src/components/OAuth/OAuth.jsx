@@ -9,6 +9,7 @@ import {
   fetchSignInMethodsForEmail,
   getRedirectResult,
   TwitterAuthProvider,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +18,7 @@ import toast from "react-hot-toast";
 import OAuthIcon from "../OAuthIcon/OAuthIcon";
 import googleIcon from "../../assets/images/google.png";
 import facebookIcon from "../../assets/images/facebook.png";
-import twitterIcon from "../../assets/images/twitter.png";
+import githubIcon from "../../assets/images/github.png";
 import { notificationAction } from "../../redux/slices/notification.slice";
 
 const auth = getAuth(app);
@@ -75,10 +76,25 @@ export default function OAuth() {
       dispatch(notificationAction.setError(error.code));
     }
   };
-  const handleTwitterClick = async () => {
+  const handleGithubClick = async () => {
     try {
-      const provider = new TwitterAuthProvider();
+      const provider = new GithubAuthProvider();
       const result = await signInWithPopup(auth, provider);
+      const res = await fetch("/api/auth/facebook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL || result._tokenResponse.photoUrl,
+        }),
+      });
+      const data = await res.json();
+      dispatch(userActions.signInSuccess(data));
+      localStorage.setItem("logged-in-user", JSON.stringify(data));
+      navigate("/");
     } catch (error) {
       dispatch(notificationAction.setError(error.code));
     }
@@ -88,7 +104,7 @@ export default function OAuth() {
     <div className=" w-full flex items-center gap-5 justify-center mt-2 mb-3 lg:mb-0">
       <OAuthIcon socialIcon={googleIcon} handleClick={handleGoogleClick} />
       <OAuthIcon socialIcon={facebookIcon} handleClick={handleFacebookClick} />
-      <OAuthIcon socialIcon={twitterIcon} handleClick={handleTwitterClick} />
+      <OAuthIcon socialIcon={githubIcon} handleClick={handleGithubClick} />
     </div>
   );
 }
