@@ -21,4 +21,8 @@ authRouter.post("/facebook", (req, res, next) => {
   authController.facebookAuth(req, res, next);
 });
 
+authRouter.post("/github", (req, res, next) => {
+  authController.githubAuth(req, res, next);
+});
+
 export default authRouter;

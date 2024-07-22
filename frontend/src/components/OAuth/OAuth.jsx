@@ -80,21 +80,30 @@ export default function OAuth() {
     try {
       const provider = new GithubAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      const res = await fetch("/api/auth/facebook", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL || result._tokenResponse.photoUrl,
-        }),
-      });
-      const data = await res.json();
-      dispatch(userActions.signInSuccess(data));
-      localStorage.setItem("logged-in-user", JSON.stringify(data));
-      navigate("/");
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      if (result.user.email !== null) {
+        const res = await fetch("/api/auth/github", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL || result._tokenResponse.photoUrl,
+          }),
+        });
+        const data = await res.json();
+        dispatch(userActions.signInSuccess(data));
+        localStorage.setItem("logged-in-user", JSON.stringify(data));
+        navigate("/");
+      } else {
+        dispatch(
+          notificationAction.setError(
+            "Something went wrong. Sorry for inconvenience"
+          )
+        );
+      }
     } catch (error) {
       dispatch(notificationAction.setError(error.code));
     }
