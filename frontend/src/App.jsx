@@ -11,8 +11,11 @@ import About from "./pages/About/About";
 import Profile from "./pages/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
 import Notification from "./components/Notifications/Notification.jsx";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "./redux/slices/user.slice.js";
 
 export default function App() {
+  const currentUser = useSelector(getCurrentUser);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -24,11 +27,11 @@ export default function App() {
         },
         {
           path: "/sign-in",
-          element: <SignIn />,
+          element: currentUser ? <Navigate to="/" /> : <SignIn />,
         },
         {
           path: "/sign-up",
-          element: <SignUp />,
+          element: currentUser ? <Navigate to="/" /> : <SignUp />,
         },
         {
           path: "/about",
@@ -36,7 +39,7 @@ export default function App() {
         },
         {
           path: "/profile",
-          element: <Profile />,
+          element: currentUser ? <Profile /> : <Navigate to="/" />,
         },
       ],
     },
