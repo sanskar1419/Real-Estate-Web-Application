@@ -16,4 +16,9 @@ authRouter.post("/sign-in", (req, res, next) => {
 authRouter.post("/google", (req, res, next) => {
   authController.googleOAuth(req, res, next);
 });
+
+authRouter.post("/facebook", (req, res, next) => {
+  authController.facebookAuth(req, res, next);
+});
+
 export default authRouter;
