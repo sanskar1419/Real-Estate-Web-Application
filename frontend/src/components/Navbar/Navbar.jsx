@@ -2,8 +2,12 @@ import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { getCurrentUser } from "../../redux/slices/user.slice";
 
 export default function Navbar() {
+  const currentUser = useSelector(getCurrentUser);
+
   return (
     <>
       <header className=" text-white p-2 bg-slate-950">
@@ -41,14 +45,24 @@ export default function Navbar() {
             >
               <li className="hidden sm:inline  hover:underline">About</li>
             </NavLink>
-            <NavLink
-              to="/sign-in"
-              style={({ isActive }) =>
-                isActive ? { color: "#22c55e" } : { color: "white" }
-              }
-            >
-              <li className=" hover:underline"> Sign in</li>
-            </NavLink>
+            {currentUser ? (
+              <NavLink to="/profile">
+                <img
+                  className="rounded-full h-7 w-7 object-cover"
+                  src={currentUser.avatar}
+                  alt="profile"
+                />
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/sign-in"
+                style={({ isActive }) =>
+                  isActive ? { color: "#22c55e" } : { color: "white" }
+                }
+              >
+                <li className=" hover:underline"> Sign in</li>
+              </NavLink>
+            )}
           </ul>
           <div className="dropdown dropdown-end md:hidden">
             <div tabIndex={0} role="button" className="">
@@ -60,36 +74,47 @@ export default function Navbar() {
               tabIndex={0}
               className="menu menu-xs dropdown-content bg-slate-950 rounded-tr-box z-[1] mt-3 w-52 p-2 shadow text-sky-100"
             >
-              <li>
-                <NavLink
-                  to="/"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#22c55e" } : { color: "white" }
-                  }
-                >
-                  <a className="justify-between">Home</a>
+              {currentUser ? (
+                <NavLink to="/profile">
+                  <div className=" flex items-center mb-3">
+                    <img
+                      className="rounded-full h-7 w-7 object-cover"
+                      src={currentUser.avatar}
+                      alt="profile"
+                    />
+                    <span className="ml-3 text-md font-bold">
+                      {currentUser.username}
+                    </span>
+                  </div>
                 </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/about"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#22c55e" } : { color: "white" }
-                  }
-                >
-                  <a>About</a>
-                </NavLink>
-              </li>
-              <li>
+              ) : (
                 <NavLink
                   to="/sign-in"
                   style={({ isActive }) =>
                     isActive ? { color: "#22c55e" } : { color: "white" }
                   }
                 >
-                  <a>Sign In</a>
+                  <li>Sign In</li>
                 </NavLink>
-              </li>
+              )}
+              <NavLink
+                to="/"
+                style={({ isActive }) =>
+                  isActive ? { color: "#22c55e" } : { color: "white" }
+                }
+              >
+                <li className="justify-between">Home</li>
+              </NavLink>
+
+              <NavLink
+                to="/about"
+                style={({ isActive }) =>
+                  isActive ? { color: "#22c55e" } : { color: "white" }
+                }
+              >
+                <li>About</li>
+              </NavLink>
+
               <li>
                 <input
                   type="text"

@@ -4,11 +4,7 @@ import {
   GoogleAuthProvider,
   getAuth,
   signInWithPopup,
-  signInWithRedirect,
   FacebookAuthProvider,
-  fetchSignInMethodsForEmail,
-  getRedirectResult,
-  TwitterAuthProvider,
   GithubAuthProvider,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
@@ -32,21 +28,29 @@ export default function OAuth() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
-      const res = await fetch("/api/auth/google", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL,
-        }),
-      });
-      const data = await res.json();
-      dispatch(userActions.signInSuccess(data));
-      localStorage.setItem("logged-in-user", JSON.stringify(data));
-      navigate("/");
+      if (result.user.email !== null) {
+        const res = await fetch("/api/auth/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL,
+          }),
+        });
+        const data = await res.json();
+        dispatch(userActions.signInSuccess(data));
+        localStorage.setItem("logged-in-user", JSON.stringify(data));
+        navigate("/");
+      } else {
+        dispatch(
+          notificationAction.setError(
+            "Something went wrong. Sorry for inconvenience"
+          )
+        );
+      }
     } catch (error) {
       dispatch(notificationAction.setError(error.code));
     }
