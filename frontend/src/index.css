@@ -13,3 +13,18 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+
+.gradientBorder {
+  border-image: linear-gradient(to right, #3acfd5 0%, #3a4ed5 100%) 1;
+  /* border-radius: 50%; this doesn't work */
+  border-width: 6px;
+  border-style: solid;
+  /* padding: 5px; */
+}
+
+.round {
+  border: 20px solid transparent;
+  background: linear-gradient(#151515, #151515) padding-box,
+    linear-gradient(to top, #11998e, #38ef7d) border-box;
+  border-radius: 50%;
+}
