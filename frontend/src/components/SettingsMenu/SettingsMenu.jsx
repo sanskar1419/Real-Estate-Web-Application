@@ -5,10 +5,13 @@ import deleteImg from "../../assets/images/delete.png";
 import settingImg from "../../assets/images/settings.png";
 import cancelImg from "../../assets/images/cancel.png";
 
-export default function SettingsMenu() {
+export default function SettingsMenu({
+  showUpdateButton,
+  setShowUpdateButton,
+}) {
   const menuRef = useRef();
   const [showMenu, setShowMenu] = useState(false);
-  const [showUpdateButton, setShowUpdateButton] = useState(false);
+
   const handleMenuVisibility = () => {
     setShowMenu(true);
   };
