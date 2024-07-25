@@ -17,6 +17,7 @@ export default function Profile() {
       <div className=" bg-[url('assets/images/misurina-sunset.jpg')] bg-cover w-full h-[45vh] opacity-60 relative flex justify-center z-0">
         <ProfileInformation />
       </div>
+      <div className="w-full border border-white mt-[5%]"></div>
     </div>
   );
 }
