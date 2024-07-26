@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/slices/user.slice";
 import SettingsMenu from "../SettingsMenu/SettingsMenu";
+import styles from "./ProfileInformation.module.css";
 
 export default function ProfileInformation() {
   const currentUser = useSelector(getCurrentUser);
@@ -20,21 +21,17 @@ export default function ProfileInformation() {
     });
   };
 
-  console.log(formData);
   return (
-    <div className="absolute bottom-[-15%] w-[90%] z-[999] rounded-3xl drop-shadow-2xl bg-slate-900 p-4 flex items-center justify-center gap-3 h-[30vh]">
+    <div
+      className={`absolute bottom-[-15%] w-[90%] bg-slate-900 p-4 flex items-center justify-center gap-3 h-[30vh] ${styles.profileContainer}`}
+      s
+    >
       <SettingsMenu
         showUpdateButton={showUpdateButton}
         setShowUpdateButton={setShowUpdateButton}
       />
-      <div className="relative w-[12%] h-[90%] flex items-center justify-center rounded-2xl mr-3 bg-gradient-to-r from-purple-500 to-pink-500">
-        <div className="w-[90%] h-[90%] rounded-2xl">
-          <img
-            alt="profile"
-            src={currentUser.avatar}
-            className="w-full h-full rounded-2xl"
-          />
-        </div>
+      <div className={`${styles.profilePhotoContainer}`}>
+        <img alt="profile" src={currentUser.avatar} className="w-full h-full" />
       </div>
       <div className="border-r border-gray-300 w-[20%] ">
         <div className=" text-xl font-bold">Sanskar Gupta</div>
