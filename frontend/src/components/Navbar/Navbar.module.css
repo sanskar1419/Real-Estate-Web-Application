@@ -1,0 +1,50 @@
+.profilePhoto {
+  height: 50px;
+  margin: 0 auto;
+  width: 50px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 999;
+}
+
+.profilePhoto img {
+  border-radius: 50%;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.profilePhoto::after,
+.profilePhoto::before {
+  box-sizing: content-box;
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(
+    from var(--angle),
+    #ff4545,
+    #00ff99,
+    #ff0095,
+    #ff4545
+  );
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 3px;
+  border-radius: 50%;
+  animation: 2s spin linear infinite;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}

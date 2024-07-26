@@ -31,14 +31,14 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: conic-gradient(
+  /* background-image: conic-gradient(
     from var(--angle),
     #ff4545,
     #00ff99,
     #006aff,
     #ff0095,
     #ff4545
-  );
+  ); */
   background-image: conic-gradient(
     from var(--angle),
     transparent,

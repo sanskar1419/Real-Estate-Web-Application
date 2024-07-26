@@ -4,13 +4,14 @@ import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/slices/user.slice";
+import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
 
   return (
     <>
-      <header className=" text-white p-2 bg-slate-950">
+      <header className=" text-white p-3 bg-slate-950">
         <div className="flex justify-between items-center max-w-6xl mx-auto px-2 pl-3 pr-3">
           <NavLink to="/">
             <h1 className="font-bold text-xl flex flex-wrap">
@@ -28,14 +29,16 @@ export default function Navbar() {
               <FaSearch className="text-sky-100 ml-3" />
             </button>
           </form> */}
-          <ul className="gap-6 hidden md:flex">
+          <ul className="gap-6 hidden md:flex h-full">
             <NavLink
               to="/"
               style={({ isActive }) =>
                 isActive ? { color: "#22c55e" } : { color: "white" }
               }
             >
-              <li className="hidden sm:inline hover:underline">Home</li>
+              <li className="hidden hover:underline sm:flex sm:items-center sm:justify-center h-full font-bold">
+                Home
+              </li>
             </NavLink>
             <NavLink
               to="/about"
@@ -43,15 +46,19 @@ export default function Navbar() {
                 isActive ? { color: "#22c55e" } : { color: "white" }
               }
             >
-              <li className="hidden sm:inline  hover:underline">About</li>
+              <li className="hidden sm:flex sm:items-center sm:justify-center hover:underline h-full font-bold">
+                About
+              </li>
             </NavLink>
             {currentUser ? (
               <NavLink to="/profile">
-                <img
-                  className="rounded-full h-7 w-7 object-cover"
-                  src={currentUser.avatar}
-                  alt="profile"
-                />
+                <div className={`${styles.profilePhoto}`}>
+                  <img
+                    className="h-full w-full"
+                    src={currentUser.avatar}
+                    alt="profile"
+                  />
+                </div>
               </NavLink>
             ) : (
               <NavLink
@@ -77,11 +84,13 @@ export default function Navbar() {
               {currentUser ? (
                 <NavLink to="/profile">
                   <div className=" flex items-center mb-3">
-                    <img
-                      className="rounded-full h-7 w-7 object-cover"
-                      src={currentUser.avatar}
-                      alt="profile"
-                    />
+                    <div className={`${styles.profilePhoto}`}>
+                      <img
+                        className="h-full w-full"
+                        src={currentUser.avatar}
+                        alt="profile"
+                      />
+                    </div>
                     <span className="ml-3 text-md font-bold">
                       {currentUser.username}
                     </span>
