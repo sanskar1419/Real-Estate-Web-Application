@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/slices/user.slice";
 import SettingsMenu from "../SettingsMenu/SettingsMenu";
 import styles from "./ProfileInformation.module.css";
 
 export default function ProfileInformation() {
+  const profilePictureRef = useRef(null);
   const currentUser = useSelector(getCurrentUser);
   const [formData, setFormData] = useState({
     email: currentUser.email,
@@ -13,6 +14,9 @@ export default function ProfileInformation() {
     address: "Agartala, Tripura India",
   });
   const [showUpdateButton, setShowUpdateButton] = useState(false);
+  const [file, setFile] = useState(undefined);
+
+  console.log(file);
 
   const handleFormData = (e) => {
     setFormData({
@@ -30,8 +34,20 @@ export default function ProfileInformation() {
         showUpdateButton={showUpdateButton}
         setShowUpdateButton={setShowUpdateButton}
       />
+      <input
+        type="file"
+        accept="image/*"
+        ref={profilePictureRef}
+        hidden
+        onChange={(e) => setFile(e.target.files[0])}
+      />
       <div className={`${styles.profilePhotoContainer}`}>
-        <img alt="profile" src={currentUser.avatar} className="w-full h-full" />
+        <img
+          alt="profile"
+          src={currentUser.avatar}
+          className="w-full h-full"
+          onClick={() => profilePictureRef.current.click()}
+        />
       </div>
       <div className="border-r border-gray-300 w-[20%] ">
         <div className=" text-xl font-bold">Sanskar Gupta</div>
