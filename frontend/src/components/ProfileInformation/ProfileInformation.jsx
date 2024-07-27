@@ -30,6 +30,14 @@ export default function ProfileInformation() {
     if (file) handleFileUpload(file);
   }, [file]);
 
+  useEffect(() => {
+    if (fileUploadError) {
+      setTimeout(() => {
+        setFileUploadError(false);
+      }, 3000);
+    }
+  }, [fileUploadError]);
+
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
     const filename = new Date().getTime() + file.name;
@@ -86,6 +94,20 @@ export default function ProfileInformation() {
             onClick={() => profilePictureRef.current.click()}
           />
         </div>
+
+        <p className="text-xs self-center text-center mt-3">
+          {fileUploadError ? (
+            <span className="text-red-700">
+              Error Image upload (image must be less than 2 mb)
+            </span>
+          ) : fileUploadPercentage > 0 && fileUploadPercentage < 100 ? (
+            <span className="text-slate-200">{`Uploading ${fileUploadPercentage}%`}</span>
+          ) : fileUploadPercentage === 100 ? (
+            <span className="text-green-700">Image successfully uploaded!</span>
+          ) : (
+            ""
+          )}
+        </p>
       </div>
       <div className="border-r border-gray-300 w-[20%] ">
         <div className=" text-xl font-bold">Sanskar Gupta</div>
