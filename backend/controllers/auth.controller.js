@@ -61,6 +61,8 @@ export default class AuthController {
           password: hashedPassword,
           email: req.body.email,
           avatar: req.body.photo,
+          firstName: req.body.name.split(" ")[0] || "",
+          lastName: req.body.name.split(" ")[1] || "",
         });
         generateTokenAndSetCookie(newUser._id, res);
         const { password: pass, ...rest } = newUser._doc;
@@ -90,6 +92,8 @@ export default class AuthController {
           password: hashedPassword,
           email: req.body.email,
           avatar: req.body.photo,
+          firstName: req.body.name.split(" ")[0] || "",
+          lastName: req.body.name.split(" ")[1] || "",
         });
         generateTokenAndSetCookie(newUser._id, res);
         const { password: pass, ...rest } = newUser._doc;
@@ -119,6 +123,8 @@ export default class AuthController {
           password: hashedPassword,
           email: req.body.email,
           avatar: req.body.photo,
+          firstName: req.body.name.split(" ")[0] || "",
+          lastName: req.body.name.split(" ")[1] || "",
         });
         generateTokenAndSetCookie(newUser._id, res);
         const { password: pass, ...rest } = newUser._doc;
