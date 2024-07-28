@@ -18,7 +18,8 @@ export default class AuthController {
         password: hashedPassword,
       });
 
-      res.status(201).json("User Registered Successfully");
+      const { password: pass, ...rest } = newUser._doc;
+      res.status(201).json(rest);
     } catch (error) {
       console.log(error);
       next(error);
