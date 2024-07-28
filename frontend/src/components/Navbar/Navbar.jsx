@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className=" text-white p-3 bg-slate-950">
+      <header className=" text-white p-3 bg-slate-950 shadow-slate-100 shadow-inner drop-shadow-2xl">
         <div className="flex justify-between items-center max-w-6xl mx-auto px-2 pl-3 pr-3">
           <NavLink to="/">
             <h1 className="font-bold text-xl flex flex-wrap">

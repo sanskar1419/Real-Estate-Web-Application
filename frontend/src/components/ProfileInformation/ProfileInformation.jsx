@@ -71,7 +71,7 @@ export default function ProfileInformation() {
 
   return (
     <div
-      className={`absolute bottom-[-15%] w-[90%] bg-slate-900 p-4 flex items-center justify-center gap-3 h-[30vh] ${styles.profileContainer} min-h-[35vh]`}
+      className={`absolute w-[90%] bg-slate-950 p-4 flex items-center justify-center gap-3 h-[30vh] ${styles.profileContainer} min-h-[35vh] shadow-slate-400 shadow-inner opacity-100 text-white`}
     >
       <SettingsMenu
         showUpdateButton={showUpdateButton}
