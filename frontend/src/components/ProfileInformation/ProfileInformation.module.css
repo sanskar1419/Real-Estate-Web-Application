@@ -34,7 +34,8 @@
   background-image: conic-gradient(
     from var(--angle),
     transparent,
-    rgb(21, 223, 21)
+    rgb(21, 223, 21),
+    rgb(55, 100, 55)
   );
   top: 50%;
   left: 50%;
