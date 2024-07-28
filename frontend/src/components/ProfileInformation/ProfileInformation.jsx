@@ -14,13 +14,7 @@ import {
 export default function ProfileInformation() {
   const profilePictureRef = useRef(null);
   const currentUser = useSelector(getCurrentUser);
-  const [formData, setFormData] = useState({
-    email: currentUser.email,
-    dob: "1999-12-19",
-    phoneNumber: 8259990668,
-    address: "Agartala, Tripura India",
-    avatar: currentUser.avatar,
-  });
+  const [formData, setFormData] = useState({});
   const [showUpdateButton, setShowUpdateButton] = useState(false);
   const [file, setFile] = useState(undefined);
   const [fileUploadPercentage, setFileUploadPercentage] = useState(0);
@@ -89,7 +83,7 @@ export default function ProfileInformation() {
         <div className={`${styles.profilePhotoContainer}`}>
           <img
             alt="profile"
-            src={formData.avatar}
+            src={formData.avatar || currentUser.avatar}
             className="w-full h-full"
             onClick={() => profilePictureRef.current.click()}
           />

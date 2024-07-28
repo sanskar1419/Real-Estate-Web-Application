@@ -20,11 +20,11 @@ const userSchema = new mongoose.Schema(
     },
     dob: {
       type: Date,
-      default: new Date(),
+      default: null,
     },
-    phoneNumber: { type: Number, default: 123456780 },
-    address: { type: String, default: "city, state country" },
-    city: { type: String, default: "City" },
+    phoneNumber: { type: Number, default: 0 },
+    address: { type: String, default: "" },
+    city: { type: String, default: "" },
     avatar: {
       type: String,
       default:
