@@ -104,9 +104,13 @@ export default function ProfileInformation() {
         </p>
       </div>
       <div className="border-r border-gray-300 w-[20%] ">
-        <div className=" text-xl font-bold">Sanskar Gupta</div>
-        <div className=" text-sm text-gray-400">Engineer</div>
-        <div className=" text-xs text-gray-400">Mumbai</div>
+        <div className=" text-xl font-bold">
+          {currentUser.firstName === "" ? "First" : currentUser.firstName}{" "}
+          {currentUser.lastName === "" ? "First" : currentUser.lastName}
+        </div>
+        <div className=" text-xs text-gray-400">
+          {currentUser.city === "" ? "City" : currentUser.city.split(",")[0]}
+        </div>
       </div>
       <form className=" w-[55%] flex flex-wrap justify-around items-center p-3 text-gray-500  h-[90%]">
         <div className="mb-3  w-[30%] flex items-start justify-center flex-col">
@@ -119,7 +123,7 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 w-full`}
             id="email"
             type="email"
-            value={formData.email}
+            value={formData.email || currentUser.email || "xyz@gmail.com"}
             disabled={!showUpdateButton}
             onChange={handleFormData}
           />
@@ -134,7 +138,7 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 `}
             id="dob"
             type="date"
-            value={formData.dob}
+            value={formData.dob || currentUser.dob}
             disabled={!showUpdateButton}
             onChange={handleFormData}
           />
@@ -151,7 +155,9 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 `}
             id="phoneNumber"
             type="number"
-            value={formData.phoneNumber}
+            value={
+              formData.phoneNumber || currentUser.phoneNumber || 1234567890
+            }
             disabled={!showUpdateButton}
             onChange={handleFormData}
           />
@@ -166,7 +172,9 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 `}
             id="address"
             type="text"
-            value={formData.address}
+            value={
+              formData.address || currentUser.address || "City, State Country"
+            }
             disabled={!showUpdateButton}
             onChange={handleFormData}
           />
