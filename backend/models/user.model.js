@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     dob: {
-      type: Date,
+      type: String,
       default: null,
     },
     phoneNumber: { type: Number, default: 0 },
