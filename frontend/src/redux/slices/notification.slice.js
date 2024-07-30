@@ -30,6 +30,12 @@ const notificationSlice = createSlice({
       })
       .addCase(userActions.signInError, (state, action) => {
         state.error = action.payload;
+      })
+      .addCase(userActions.updateSuccess, (state, action) => {
+        state.message = "Hurray 🙌🙌🙌, Your detailed has been updated";
+      })
+      .addCase(userActions.updateError, (state, action) => {
+        state.error = action.payload;
       });
   },
 });

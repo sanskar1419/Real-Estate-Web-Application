@@ -8,6 +8,7 @@ import cancelImg from "../../assets/images/cancel.png";
 export default function SettingsMenu({
   showUpdateButton,
   setShowUpdateButton,
+  handleSubmit,
 }) {
   const menuRef = useRef();
   const [showMenu, setShowMenu] = useState(false);
@@ -44,7 +45,12 @@ export default function SettingsMenu({
           {showUpdateButton ? (
             <>
               <div className="w-10 h-10 p-2 rounded-full flex items-center justify-center">
-                <img alt="edit" src={updateImg} className="w-full h-full" />
+                <img
+                  alt="edit"
+                  src={updateImg}
+                  className="w-full h-full"
+                  onClick={handleSubmit}
+                />
               </div>
               <div className="w-10 h-10 p-2 rounded-full flex items-center justify-center cursor-pointer">
                 <img

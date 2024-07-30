@@ -19,6 +19,16 @@ export const userSlice = createSlice({
     signInError: (state, action) => {
       state.loading = false;
     },
+    updateStart: (state, action) => {
+      state.loading = true;
+    },
+    updateSuccess: (state, action) => {
+      state.loading = false;
+      state.currentUser = action.payload;
+    },
+    updateError: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "../../redux/slices/user.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser, userActions } from "../../redux/slices/user.slice";
 import SettingsMenu from "../SettingsMenu/SettingsMenu";
 import styles from "./ProfileInformation.module.css";
 import { app } from "../../firebase";
@@ -12,6 +12,7 @@ import {
 } from "firebase/storage";
 
 export default function ProfileInformation() {
+  const dispatch = useDispatch();
   const profilePictureRef = useRef(null);
   const currentUser = useSelector(getCurrentUser);
   const [formData, setFormData] = useState({});
@@ -24,13 +25,13 @@ export default function ProfileInformation() {
     if (file) handleFileUpload(file);
   }, [file]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (fileUploadError) {
       setTimeout(() => {
         setFileUploadError(false);
       }, 3000);
     }
-  }, [fileUploadError]);
+  }, [fileUploadError]); */
 
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
@@ -63,6 +64,30 @@ export default function ProfileInformation() {
     });
   };
 
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      dispatch(userActions.updateStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(userActions.updateError(data.message));
+        return;
+      }
+
+      dispatch(userActions.updateSuccess(data));
+      localStorage.setItem("logged-in-user", JSON.stringify(data));
+    } catch (error) {
+      dispatch(userActions.updateError(error.message));
+    }
+  };
+
   return (
     <div
       className={`absolute w-[90%] bg-slate-950 p-4 flex items-center justify-center gap-3 h-[30vh] ${styles.profileContainer} min-h-[35vh] shadow-slate-400 shadow-inner opacity-100 text-white`}
@@ -70,6 +95,7 @@ export default function ProfileInformation() {
       <SettingsMenu
         showUpdateButton={showUpdateButton}
         setShowUpdateButton={setShowUpdateButton}
+        handleSubmit={handleSubmit}
       />
 
       <div className="flex items-center justify-center mr-3 flex-col">
@@ -123,7 +149,9 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 w-full`}
             id="email"
             type="email"
-            value={formData.email || currentUser.email || "xyz@gmail.com"}
+            defaultValue={
+              formData.email || currentUser.email || "xyz@gmail.com"
+            }
             disabled={!showUpdateButton}
             onChange={handleFormData}
           />
@@ -138,7 +166,7 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 `}
             id="dob"
             type="date"
-            value={formData.dob || currentUser.dob}
+            defaultValue={formData.dob || currentUser.dob}
             disabled={!showUpdateButton}
             onChange={handleFormData}
           />
@@ -154,12 +182,14 @@ export default function ProfileInformation() {
                 : "outline-none"
             } bg-transparent mr-2 `}
             id="phoneNumber"
-            type="number"
-            value={
+            type="tel"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            defaultValue={
               formData.phoneNumber || currentUser.phoneNumber || 1234567890
             }
             disabled={!showUpdateButton}
             onChange={handleFormData}
+            maxLength={10}
           />
         </div>
         <div className="mb-3  flex items-start justify-center flex-col">
@@ -172,7 +202,7 @@ export default function ProfileInformation() {
             } bg-transparent mr-2 `}
             id="address"
             type="text"
-            value={
+            defaultValue={
               formData.address || currentUser.address || "City, State Country"
             }
             disabled={!showUpdateButton}
