@@ -5,13 +5,36 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/slices/user.slice";
 import styles from "./Navbar.module.css";
+import logo from "../../assets/images/Dwellio_transparent-.png";
 
 export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
 
   return (
     <>
-      <header className=" text-white p-3 bg-slate-950 shadow-slate-500 shadow-inner drop-shadow-2xl">
+      <div
+        className={`${styles.navbarContainer} outline flex items-center justify-center py-3 text-black`}
+      >
+        <div className={`w-[90%] flex items-center justify-between`}>
+          <img
+            alt="logo"
+            src={logo}
+            className={`w-[20%] md:w-[10%] cursor-pointer`}
+          />
+          <div className={`w-1/2 flex items-center gap-3 justify-end text-sm`}>
+            <div className={`${styles.navButton} cursor-pointer`}>Home</div>
+            <div className={`${styles.navButton} cursor-pointer`}>About</div>
+            <div className={`${styles.navButton} cursor-pointer`}>Sign In</div>
+          </div>
+        </div>
+      </div>
+      <Outlet />
+    </>
+  );
+}
+
+/* 
+<header className=" text-white p-3 bg-slate-950 shadow-slate-500 shadow-inner drop-shadow-2xl">
         <div className="flex justify-between items-center max-w-6xl mx-auto px-2 pl-3 pr-3">
           <NavLink to="/">
             <h1 className="font-bold text-xl flex flex-wrap">
@@ -19,16 +42,7 @@ export default function Navbar() {
               <span className="text-green-500">Dwell</span>
             </h1>
           </NavLink>
-          {/* <form className="m-2 p-2 rounded-xl hidden md:flex items-center border-gray-400 border-solid border-2">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="bg-transparent focus:outline-none focus:border-sky-100 w-24 lg:w-64 md:w-48 sm:w-34"
-            />
-            <button>
-              <FaSearch className="text-sky-100 ml-3" />
-            </button>
-          </form> */}
+
           <ul className="gap-6 hidden md:flex h-full">
             <NavLink
               to="/"
@@ -135,7 +149,4 @@ export default function Navbar() {
           </div>
         </div>
       </header>
-      <Outlet />
-    </>
-  );
-}
+*/

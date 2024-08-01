@@ -1,3 +1,12 @@
+.navbarContainer {
+  width: 100vw;
+  background-image: linear-gradient(180deg, #7091e6, #ede8f5);
+  font-family: consolas;
+}
+
+.navButton {
+}
+
 .profilePhoto {
   height: 50px;
   margin: 0 auto;
