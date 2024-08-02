@@ -23,7 +23,7 @@ export default function Navbar() {
         </div>
       ) : (
         <div
-          className={`${styles.navbarContainer} outline flex items-center justify-center py-1 text-black`}
+          className={`${styles.navbarContainer} flex items-center justify-center py-1 text-black`}
         >
           <div className={`w-[90%] flex items-center justify-between`}>
             <NavLink to="/" className="w-[30%] flex items-center gap-4">

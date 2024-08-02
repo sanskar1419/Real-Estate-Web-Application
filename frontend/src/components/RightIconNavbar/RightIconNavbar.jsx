@@ -14,7 +14,7 @@ export default function RightIconNavbar() {
     const text = "Dwellio E-state";
     const result = text.split("");
     setCharArray([...result]);
-  });
+  }, []);
   return (
     <div
       className={`fixed w-12 h-screen right-0 ${styles.rightNavbar} flex items-center py-2 flex-col text-black gap-5 glass cursor-pointer`}
