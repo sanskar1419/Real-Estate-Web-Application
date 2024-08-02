@@ -10,45 +10,79 @@ import Logo from "../Logo/Logo";
 import homeImage from "../../assets/images/home.png";
 import logInImage from "../../assets/images/log-in.png";
 import aboutImage from "../../assets/images/about.png";
+import RightIconNavbar from "../RightIconNavbar/RightIconNavbar";
 
 export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
 
   return (
     <>
-      <div
-        className={`${styles.navbarContainer} outline flex items-center justify-center py-1 text-black`}
-      >
-        <div className={`w-[90%] flex items-center justify-between`}>
-          <div className="w-[30%] flex items-center gap-4">
-            {" "}
-            <Logo />
-            <span>Dwellio</span>
-          </div>
-          <div
-            className={`w-[60%] flex items-center gap-3 justify-end text-sm`}
-          >
+      {currentUser ? (
+        <div className="relative w-full">
+          <RightIconNavbar />
+        </div>
+      ) : (
+        <div
+          className={`${styles.navbarContainer} outline flex items-center justify-center py-1 text-black`}
+        >
+          <div className={`w-[90%] flex items-center justify-between`}>
+            <NavLink to="/" className="w-[30%] flex items-center gap-4">
+              {" "}
+              <Logo />
+              <span>Dwellio</span>
+            </NavLink>
             <div
-              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+              className={`w-[60%] flex items-center gap-3 justify-end text-sm`}
             >
-              <img alt="home" src={homeImage} className="w-4" />
-              <span>Home</span>
-            </div>
-            <div
-              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
-            >
-              <img alt="About" src={aboutImage} className="w-4" />
-              <span>About</span>
-            </div>
-            <div
-              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
-            >
-              <img alt="signIn" src={logInImage} className="w-4" />
-              <span>Sign-In</span>
+              <NavLink
+                to="/"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        borderBottom: "3px solid #3d52a0",
+                        paddingBottom: "1px",
+                      }
+                    : {}
+                }
+                className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+              >
+                <img alt="home" src={homeImage} className="w-4" />
+                <span>Home</span>
+              </NavLink>
+              <NavLink
+                to="/about"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        borderBottom: "3px solid #3d52a0",
+                        paddingBottom: "1px",
+                      }
+                    : {}
+                }
+                className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+              >
+                <img alt="About" src={aboutImage} className="w-4" />
+                <span>About</span>
+              </NavLink>
+              <NavLink
+                to="/sign-in"
+                style={({ isActive }) =>
+                  isActive
+                    ? {
+                        borderBottom: "3px solid #3d52a0",
+                        paddingBottom: "1px",
+                      }
+                    : {}
+                }
+                className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+              >
+                <img alt="signIn" src={logInImage} className="w-4" />
+                <span>Sign-In</span>
+              </NavLink>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <Outlet />
     </>
   );
