@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/slices/user.slice";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/images/Dwellio_transparent-.png";
+import Logo from "../Logo/Logo";
+import homeImage from "../../assets/images/home.png";
+import logInImage from "../../assets/images/log-in.png";
+import aboutImage from "../../assets/images/about.png";
 
 export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
@@ -13,18 +17,35 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={`${styles.navbarContainer} outline flex items-center justify-center py-3 text-black`}
+        className={`${styles.navbarContainer} outline flex items-center justify-center py-1 text-black`}
       >
         <div className={`w-[90%] flex items-center justify-between`}>
-          <img
-            alt="logo"
-            src={logo}
-            className={`w-[20%] md:w-[10%] cursor-pointer`}
-          />
-          <div className={`w-1/2 flex items-center gap-3 justify-end text-sm`}>
-            <div className={`${styles.navButton} cursor-pointer`}>Home</div>
-            <div className={`${styles.navButton} cursor-pointer`}>About</div>
-            <div className={`${styles.navButton} cursor-pointer`}>Sign In</div>
+          <div className="w-[30%] flex items-center gap-4">
+            {" "}
+            <Logo />
+            <span>Dwellio</span>
+          </div>
+          <div
+            className={`w-[60%] flex items-center gap-3 justify-end text-sm`}
+          >
+            <div
+              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+            >
+              <img alt="home" src={homeImage} className="w-4" />
+              <span>Home</span>
+            </div>
+            <div
+              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+            >
+              <img alt="About" src={aboutImage} className="w-4" />
+              <span>About</span>
+            </div>
+            <div
+              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+            >
+              <img alt="signIn" src={logInImage} className="w-4" />
+              <span>Sign-In</span>
+            </div>
           </div>
         </div>
       </div>
