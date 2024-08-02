@@ -99,6 +99,7 @@ export default function SignIn() {
         <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-4 w-[80%] justify-center items-center"
+          style={{ color: "#adbbda" }}
         >
           <div className=" w-full">
             <label className=" relative">
@@ -128,7 +129,7 @@ export default function SignIn() {
           </div>
 
           <button
-            className="text-white p-3 uppercase bg-slate-950 w-[90%] rounded-full shadow-slate-700 shadow-inner hover:bg-blue-500"
+            className="text-white p-3 uppercase bg-slate-950 w-[90%] rounded-full shadow-slate-700 shadow-inner hover:bg-blue-500 btn flex items-center justify-center"
             style={{ color: "#adbbda" }}
           >
             {userLoading ? <PropagateLoader color="#050505" /> : "Sign In"}
