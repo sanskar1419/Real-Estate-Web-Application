@@ -62,21 +62,51 @@ export default function Navbar() {
               <img alt="About" src={aboutImage} className="w-4" />
               <span>About</span>
             </NavLink>
-            <NavLink
-              to="/sign-in"
-              style={({ isActive }) =>
-                isActive
-                  ? {
-                      borderBottom: "3px solid #141010",
-                      paddingBottom: "1px",
-                    }
-                  : {}
-              }
-              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+            <div
+              className="flex items-center gap-1"
+              onClick={() => setShowProfileMenu(!showProfileMenu)}
+              onM
             >
-              <img alt="signIn" src={logInImage} className="w-4" />
-              <span>Sign-In</span>
-            </NavLink>
+              <div
+                className={`dropdown dropdown-end relative ${styles.profilePhoto} flex items-center justify-center`}
+              >
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={currentUser.avatar}
+                    />
+                  </div>
+                </div>
+                {showProfileMenu && (
+                  <ul
+                    className="menu menu-sm first-color rounded-lg z-[1] mt-3 max-w-fit p-2 shadow absolute bottom-[-230%] left-[-100px] xl:left-[-100%]"
+                    onMouseLeave={() => setShowProfileMenu(false)}
+                  >
+                    <NavLink to="/profile">
+                      <li>
+                        <a className="justify-between">
+                          Profile
+                          <span className="badge">New</span>
+                        </a>
+                      </li>
+                    </NavLink>
+                    <li>
+                      <a>Settings</a>
+                    </li>
+                    <NavLink to="/logout">
+                      <li>
+                        <a>Logout</a>
+                      </li>
+                    </NavLink>
+                  </ul>
+                )}
+              </div>
+            </div>
           </div>
           <label className="cursor-pointer sm:hidden">
             {toggleMenuButton ? (
@@ -174,7 +204,7 @@ export default function Navbar() {
                     <div className="w-10 rounded-full">
                       <img
                         alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                        src={currentUser.avatar}
                       />
                     </div>
                   </div>
@@ -183,23 +213,27 @@ export default function Navbar() {
                       className="menu menu-sm first-color rounded-lg z-[1] mt-3 max-w-fit p-2 shadow absolute bottom-[-230%] left-0"
                       onMouseLeave={() => setShowProfileMenu(false)}
                     >
-                      <li>
-                        <a className="justify-between">
-                          Profile
-                          <span className="badge">New</span>
-                        </a>
-                      </li>
+                      <NavLink to="/profile">
+                        <li>
+                          <a className="justify-between">
+                            Profile
+                            <span className="badge">New</span>
+                          </a>
+                        </li>
+                      </NavLink>
                       <li>
                         <a>Settings</a>
                       </li>
-                      <li>
-                        <a>Logout</a>
-                      </li>
+                      <NavLink to="/logout">
+                        <li>
+                          <a>Logout</a>
+                        </li>
+                      </NavLink>
                     </ul>
                   )}
                 </div>
                 <div className="">
-                  {currentUser ? currentUser.userName : "Sara"}
+                  {currentUser ? currentUser.username : "Guest"}
                 </div>
               </div>
             ) : (

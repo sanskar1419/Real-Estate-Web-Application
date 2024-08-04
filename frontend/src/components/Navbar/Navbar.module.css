@@ -13,6 +13,7 @@
   border-radius: 50%;
   position: relative;
   z-index: 999; */
+  z-index: 50;
 }
 
 @property --angle {
@@ -28,7 +29,11 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: conic-gradient(from var(--angle), transparent, pink);
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent,
+    rgb(208, 177, 182)
+  );
   top: 50%;
   left: 50%;
   translate: -50% -50%;
