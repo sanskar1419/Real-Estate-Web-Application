@@ -70,73 +70,72 @@ export default function SignIn() {
 
   /* Returning the JSX */
   return (
-    <div className=" w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-black">
-      <div className=" opacity-20 bg-cover w-full min-h-full absolute z-[-10]"></div>
-      <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
-        <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">
-          Make your holiday special
-        </div>
-        <div className=" font-extrabold text-3xl mb-3 w-full ">
-          Unleash the traveller{" "}
-          <span className="" style={{ color: "#adbbda" }}>
-            inside you
-          </span>
-          , Enjoy your dream vacation
-        </div>
-        <div className="w-full flex items-center justify-center lg:justify-start">
-          <img
-            alt="Sign In"
-            src={signInImage}
-            className=" w-[90%] lg:w-[60%]"
-          />
-        </div>
-        <div className=" text-[0.7rem] sm:text-xs flex justify-center lg:justify-start w-full">
-          Get started with one of the best travel destination
-        </div>
-      </div>
-      <div className="w-[90%] lg:w-[50%] sm:w-[70%] lg:p-12 flex justify-center items-center flex-col">
-        <h1 className="text-3xl text-center font-semibold mb-5">Sign In</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-4 w-[80%] justify-center items-center"
-          style={{ color: "#adbbda" }}
-        >
-          <div className=" w-full">
-            <label className=" relative">
-              <input
-                type="email"
-                placeholder="Email"
-                className="p-2 rounded-lg w-full placeholder: italic bg-slate-950 border border-gray-700 pr-8"
-                id="email"
-                required
-                onChange={handleChange}
-              />
-              <img
-                alt="mail"
-                src={mail}
-                className=" absolute w-5 right-2 top-0"
-              />
-            </label>
+    <>
+      <div className=" w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-[#adbbda]">
+        <div className=" bg-[url('./assets/images/background.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover"></div>
+        <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
+          <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">
+            Make your holiday special
           </div>
-          <PasswordInput handleChange={handleChange} placeholder="Password" />
-          <div className="flex gap-2 mt-1 items-end justify-end w-full text-xs">
-            <p>Don't have a account?</p>
-            <Link to={"/sign-up"}>
-              <span className="" style={{ color: "#adbbda" }}>
-                Sign Up
-              </span>
-            </Link>
+          <div className=" font-extrabold text-3xl mb-3 w-full ">
+            Unleash the traveller <span className="text-first">inside you</span>
+            , Enjoy your dream vacation
           </div>
-
-          <button
-            className="text-white p-3 uppercase bg-slate-950 w-[90%] rounded-full shadow-slate-700 shadow-inner hover:bg-blue-500 btn flex items-center justify-center"
+          <div className="w-full flex items-center justify-center lg:justify-start">
+            <img
+              alt="Sign In"
+              src={signInImage}
+              className=" w-[90%] lg:w-[60%]"
+            />
+          </div>
+          <div className=" text-[0.7rem] sm:text-xs flex justify-center lg:justify-start w-full">
+            Get started with one of the best travel destination
+          </div>
+        </div>
+        <div className="w-[90%] lg:w-[50%] sm:w-[70%] lg:p-12 flex justify-center items-center flex-col">
+          <h1 className="text-3xl text-center font-semibold mb-5 text-first">
+            Sign In
+          </h1>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-4 w-[80%] justify-center items-center"
             style={{ color: "#adbbda" }}
           >
-            {userLoading ? <PropagateLoader color="#050505" /> : "Sign In"}
-          </button>
-          <OAuth />
-        </form>
+            <div className=" w-full">
+              <label className=" relative">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="p-2 rounded-lg w-full placeholder: italic bg-slate-950 border border-gray-700 pr-8"
+                  id="email"
+                  required
+                  onChange={handleChange}
+                />
+                <img
+                  alt="mail"
+                  src={mail}
+                  className=" absolute w-5 right-2 top-0"
+                />
+              </label>
+            </div>
+            <PasswordInput handleChange={handleChange} placeholder="Password" />
+            <div className="flex gap-2 mt-1 items-end justify-end w-full text-xs">
+              <p>Don't have a account?</p>
+              <Link to={"/sign-up"}>
+                <span className="text-first">Sign Up</span>
+              </Link>
+            </div>
+
+            <button
+              className="text-white p-3 uppercase first-color w-[90%] rounded-full shadow-slate-950 shadow-inner hover:bg-[#c3195d] btn flex items-center justify-center"
+              style={{ color: "#adbbda" }}
+            >
+              {userLoading ? <PropagateLoader color="#050505" /> : "Sign In"}
+            </button>
+            <OAuth />
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
