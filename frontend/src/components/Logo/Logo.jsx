@@ -21,6 +21,7 @@ export default function Logo() {
       className={`${styles.logo} w-[20%] md:w-[10%] cursor-pointer text-xs font-medium`}
       id="circle"
     >
+      <div className=" text-normal">DE</div>
       <div className={`${styles.text}`}>
         <p id="text">
           {charArray.map((char, i) => (

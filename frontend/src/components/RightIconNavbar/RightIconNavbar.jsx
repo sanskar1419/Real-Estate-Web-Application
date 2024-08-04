@@ -6,35 +6,17 @@ import aboutImage from "../../assets/images/about.png";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getCurrentUser, userActions } from "../../redux/slices/user.slice";
+import RightNavLogo from "../RightNavLogo/RightNavLogo";
 
-export default function RightIconNavbar() {
-  const [charArray, setCharArray] = useState([]);
+export default function RightIconNavbar({ setShowNavMenu }) {
   const currentUser = useSelector(getCurrentUser);
-  useEffect(() => {
-    const text = "Dwellio E-state";
-    const result = text.split("");
-    setCharArray([...result]);
-  }, []);
   return (
     <div
-      className={`fixed w-12 h-screen right-0 ${styles.rightNavbar} flex items-center py-2 flex-col text-black gap-5 glass cursor-pointer`}
+      className={`fixed w-12 h-screen right-0 ${styles.rightNavbar} flex items-center py-2 flex-col text-black gap-5 cursor-pointer z-20 shadow-inner shadow-black`}
+      onMouseLeave={() => setShowNavMenu(false)}
     >
       <NavLink to="/" className="flex items-center">
-        <div
-          className={`${styles.logo} cursor-pointer text-xs font-medium`}
-          id="circle"
-        >
-          <div className={`${styles.logoText}`}>DE</div>
-          <div className={`${styles.text}`}>
-            <p id="text">
-              {charArray.map((char, i) => (
-                <span style={{ transform: `rotate(${i * 23}deg)` }}>
-                  {char}
-                </span>
-              ))}
-            </p>
-          </div>
-        </div>
+        <RightNavLogo />
       </NavLink>
       <div className="flex items-center gap-3 flex-col">
         <NavLink to="/">
@@ -47,7 +29,7 @@ export default function RightIconNavbar() {
       </div>
       <NavLink
         to="/profile"
-        className="absolute bottom-3 h-10 w-10 rounded-full overflow-hidden"
+        className="absolute bottom-3 h-8 w-8 rounded-full overflow-hidden"
       >
         <img
           src={currentUser.avatar}

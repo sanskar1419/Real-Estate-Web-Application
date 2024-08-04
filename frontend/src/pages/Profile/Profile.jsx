@@ -13,10 +13,6 @@ export default function Profile() {
   const handleSignOut = () => {};
 
   return (
-    <div className="w-full relative overflow-y-auto no-scrollbar min-h-[89vh] bg-[url('assets/images/profileBackground.jpg')] shadow-2xl shadow-black-100 bg-cover opacity-50">
-      <div className="w-full h-[50vh] relative flex justify-center items-center z-0">
-        <ProfileInformation />
-      </div>
-    </div>
+    <div className=" w-full min-h-[100vh] h-screen relative shadow-2xl shadow-black-100 flex items-center overflow-y-auto no-scrollbar bg-blue-gradient text-black "></div>
   );
 }

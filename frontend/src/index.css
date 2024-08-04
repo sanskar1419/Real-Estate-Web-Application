@@ -30,6 +30,36 @@
 }
 
 .bg-blue-gradient {
-  background-image: linear-gradient(180deg, #7091e6, #3d52a0);
+  background-image: #272343;
   font-family: consolas;
+}
+
+.first-color {
+  background: #f70776;
+}
+
+.second-color {
+  background: #c3195d;
+}
+
+.third-color {
+  background: #680747;
+}
+
+.fourth-color {
+  background: #141010;
+}
+
+.text-first {
+  color: #f70776;
+}
+
+.text-second {
+  color: #c3195d;
+}
+.text-third {
+  color: #680747;
+}
+.text-fourth {
+  color: #141010;
 }

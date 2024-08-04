@@ -1,0 +1,41 @@
+.logo {
+  position: relative;
+  /* background-color: black; */
+  width: 60px;
+  height: 60px;
+  font-size: 0.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  animation: anim 7s linear infinite;
+}
+
+@keyframes anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.text span {
+  position: absolute;
+  left: 50%;
+  transform-origin: 0 30px;
+  font-size: 0.5rem;
+  font-weight: 900;
+}
+
+.logoText {
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-family: cursive;
+}

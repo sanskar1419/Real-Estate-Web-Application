@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
@@ -9,80 +9,218 @@ import logo from "../../assets/images/Dwellio_transparent-.png";
 import Logo from "../Logo/Logo";
 import homeImage from "../../assets/images/home.png";
 import logInImage from "../../assets/images/log-in.png";
-import aboutImage from "../../assets/images/about.png";
+import aboutImage from "../../assets/images/about2.png";
 import RightIconNavbar from "../RightIconNavbar/RightIconNavbar";
+import RightNavLogo from "../RightNavLogo/RightNavLogo";
 
 export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
+  const [toggleMenuButton, setToggleMenuButton] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   return (
     <>
-      {currentUser ? (
-        <div className="relative w-full">
-          <RightIconNavbar />
-        </div>
-      ) : (
-        <div
-          className={`${styles.navbarContainer} flex items-center justify-center py-1 text-black`}
-        >
-          <div className={`w-[90%] flex items-center justify-between`}>
-            <NavLink to="/" className="w-[30%] flex items-center gap-4">
-              {" "}
-              <Logo />
-              <span>Dwellio</span>
-            </NavLink>
-            <div
-              className={`w-[60%] flex items-center gap-3 justify-end text-sm`}
+      <div
+        className={`${styles.navbarContainer} flex items-center justify-center py-1 text-fourth second-color relative w-full`}
+      >
+        <div className={`w-[90%] flex items-center justify-between`}>
+          <NavLink to="/" className="w-[30%] flex items-center gap-5">
+            {" "}
+            <Logo />
+            <span>Dwellio</span>
+          </NavLink>
+          <div
+            className={`w-[60%] items-center gap-3 justify-end text-sm hidden sm:flex`}
+          >
+            <NavLink
+              to="/"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      borderBottom: "3px solid #141010",
+                      paddingBottom: "1px",
+                    }
+                  : {}
+              }
+              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
             >
-              <NavLink
-                to="/"
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        borderBottom: "3px solid #3d52a0",
-                        paddingBottom: "1px",
-                      }
-                    : {}
-                }
-                className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+              <img alt="home" src={homeImage} className="w-4" />
+              <span>Home</span>
+            </NavLink>
+            <NavLink
+              to="/about"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      borderBottom: "3px solid #141010",
+                      paddingBottom: "1px",
+                    }
+                  : {}
+              }
+              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+            >
+              <img alt="About" src={aboutImage} className="w-4" />
+              <span>About</span>
+            </NavLink>
+            <NavLink
+              to="/sign-in"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      borderBottom: "3px solid #141010",
+                      paddingBottom: "1px",
+                    }
+                  : {}
+              }
+              className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+            >
+              <img alt="signIn" src={logInImage} className="w-4" />
+              <span>Sign-In</span>
+            </NavLink>
+          </div>
+          <label className="cursor-pointer sm:hidden">
+            {toggleMenuButton ? (
+              <svg
+                className="fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 512 512"
+                onClick={() => setToggleMenuButton(false)}
               >
-                <img alt="home" src={homeImage} className="w-4" />
-                <span>Home</span>
-              </NavLink>
-              <NavLink
-                to="/about"
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        borderBottom: "3px solid #3d52a0",
-                        paddingBottom: "1px",
-                      }
-                    : {}
-                }
-                className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+                <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+              </svg>
+            ) : (
+              <svg
+                className="fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 512 512"
+                onClick={() => setToggleMenuButton(true)}
               >
-                <img alt="About" src={aboutImage} className="w-4" />
-                <span>About</span>
-              </NavLink>
+                <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+              </svg>
+            )}
+          </label>
+        </div>
+
+        {toggleMenuButton && (
+          <ul
+            className="menu first-color lg:menu-horizontal rounded-lg absolute top-[110%] z-10 w-[97%] sm:hidden"
+            onMouseLeave={() => setToggleMenuButton(false)}
+          >
+            <div
+              class={`${styles.triangleUp} absolute right-4 top-[-35px] z-10`}
+            ></div>
+            <NavLink
+              to="/"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#c3195d" } : {}
+              }
+              className="rounded-lg"
+            >
+              <li className="">
+                <a>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
+                  </svg>
+                  Home
+                  <span className="badge badge-sm">99+</span>
+                </a>
+              </li>
+            </NavLink>
+            <NavLink
+              to="/about"
+              style={({ isActive }) =>
+                isActive ? { backgroundColor: "#c3195d" } : {}
+              }
+              className="rounded-lg"
+            >
+              <li>
+                <a>
+                  <img alt="About" src={aboutImage} className="w-4" />
+                  About
+                  <span className="badge badge-sm badge-warning">NEW</span>
+                </a>
+              </li>
+            </NavLink>
+
+            {currentUser ? (
+              <div
+                className="flex items-center gap-1"
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                onM
+              >
+                <div
+                  className={`dropdown dropdown-end relative ${styles.profilePhoto} flex items-center justify-center`}
+                >
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <img
+                        alt="Tailwind CSS Navbar component"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      />
+                    </div>
+                  </div>
+                  {showProfileMenu && (
+                    <ul
+                      className="menu menu-sm first-color rounded-lg z-[1] mt-3 max-w-fit p-2 shadow absolute bottom-[-230%] left-0"
+                      onMouseLeave={() => setShowProfileMenu(false)}
+                    >
+                      <li>
+                        <a className="justify-between">
+                          Profile
+                          <span className="badge">New</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a>Settings</a>
+                      </li>
+                      <li>
+                        <a>Logout</a>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+                <div className="">
+                  {currentUser ? currentUser.userName : "Sara"}
+                </div>
+              </div>
+            ) : (
               <NavLink
                 to="/sign-in"
                 style={({ isActive }) =>
-                  isActive
-                    ? {
-                        borderBottom: "3px solid #3d52a0",
-                        paddingBottom: "1px",
-                      }
-                    : {}
+                  isActive ? { backgroundColor: "#c3195d" } : {}
                 }
-                className={`${styles.navButton} cursor-pointer flex items-center gap-1 justify-center`}
+                className="rounded-lg"
               >
-                <img alt="signIn" src={logInImage} className="w-4" />
-                <span>Sign-In</span>
+                <li>
+                  <a>
+                    <img alt="About" src={logInImage} className="w-4" />
+                    Sign-In
+                  </a>
+                </li>
               </NavLink>
-            </div>
-          </div>
-        </div>
-      )}
+            )}
+          </ul>
+        )}
+      </div>
       <Outlet />
     </>
   );
