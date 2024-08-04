@@ -70,18 +70,15 @@ export default function SignUp() {
   };
 
   return (
-    <div className=" w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-black">
-      <div className="opacity-20 bg-cover w-full min-h-full absolute z-[-10]"></div>
+    <div className=" w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-[#adbbda]">
+      <div className="bg-[url('./assets/images/background.jpg')] opacity-25 bg-cover w-full min-h-full absolute z-[-10] bg-center"></div>
       <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
         <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">
           Make your holiday special
         </div>
         <div className=" font-extrabold text-3xl mb-3 w-full ">
-          Unleash the traveller{" "}
-          <span className="" style={{ color: "#adbbda" }}>
-            inside you
-          </span>
-          , Enjoy your dream vacation
+          Unleash the traveller <span className="text-first">inside you</span>,
+          Enjoy your dream vacation
         </div>
         <div className="w-full flex items-center justify-center lg:justify-start">
           <img
@@ -95,7 +92,7 @@ export default function SignUp() {
         </div>
       </div>
       <div className="w-[90%] lg:w-[50%] sm:w-[70%] lg:p-8 flex justify-center items-center flex-col">
-        <h1 className="text-3xl text-center font-semibold mb-5">
+        <h1 className="text-3xl text-center font-semibold mb-5 text-first">
           Sign Up Here
         </h1>
         <form
@@ -161,14 +158,12 @@ export default function SignUp() {
           <div className="flex gap-2 mt-1 items-end justify-end w-full text-xs">
             <p>Already have an account?</p>
             <Link to={"/sign-in"}>
-              <span className="" style={{ color: "#adbbda" }}>
-                Sign In
-              </span>
+              <span className="text-first">Sign In</span>
             </Link>
           </div>
 
           <button
-            className="text-white p-3 uppercase bg-slate-950 w-[90%] rounded-full shadow-slate-700 shadow-inner hover:bg-blue-500 btn"
+            className="text-white p-3 uppercase first-color w-[90%] rounded-full shadow-slate-700 shadow-inner hover:bg-[#c3195d] btn"
             style={{ color: "#adbbda" }}
           >
             {userLoading ? <PropagateLoader color="#050505" /> : "Sign Up"}

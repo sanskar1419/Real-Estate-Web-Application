@@ -72,14 +72,15 @@ export default function SignIn() {
   return (
     <>
       <div className=" w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-[#adbbda]">
-        <div className=" bg-[url('./assets/images/background.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover"></div>
+        <div className=" bg-[url('./assets/images/background2.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
         <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
           <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">
             Make your holiday special
           </div>
           <div className=" font-extrabold text-3xl mb-3 w-full ">
-            Unleash the traveller <span className="text-first">inside you</span>
-            , Enjoy your dream vacation
+            <span className="text-first">Welcome Back</span>, now unleash the
+            traveller <span className="text-first">inside you</span>, Enjoy your
+            dream vacation
           </div>
           <div className="w-full flex items-center justify-center lg:justify-start">
             <img
