@@ -43,7 +43,7 @@
 }
 
 .third-color {
-  background: #680747;
+  background: #921446;
 }
 
 .fourth-color {
@@ -58,8 +58,12 @@
   color: #c3195d;
 }
 .text-third {
-  color: #680747;
+  color: #690347;
 }
 .text-fourth {
   color: #141010;
+}
+
+.cursive {
+  font-family: cursive;
 }
