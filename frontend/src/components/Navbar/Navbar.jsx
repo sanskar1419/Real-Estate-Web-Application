@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -14,6 +14,10 @@ import RightIconNavbar from "../RightIconNavbar/RightIconNavbar";
 import RightNavLogo from "../RightNavLogo/RightNavLogo";
 
 export default function Navbar() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  console.log("Path :" + currentPath);
   const currentUser = useSelector(getCurrentUser);
   const [toggleMenuButton, setToggleMenuButton] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
@@ -85,7 +89,7 @@ export default function Navbar() {
                   </div>
                   {showProfileMenu && (
                     <ul
-                      className="menu menu-sm first-color rounded-lg z-[1] mt-3 max-w-fit p-2 shadow absolute bottom-[-230%] left-[-100px] xl:left-[-100%]"
+                      className="menu menu-sm first-color rounded-lg z-[1] mt-3 max-w-fit p-2 shadow absolute top-[2.80rem] left-[-100px] xl:left-[-100%]"
                       onMouseLeave={() => setShowProfileMenu(false)}
                     >
                       <NavLink to="/profile">
@@ -96,9 +100,11 @@ export default function Navbar() {
                           </a>
                         </li>
                       </NavLink>
-                      <li>
-                        <a>Settings</a>
-                      </li>
+                      {currentPath == "/profile" ? (
+                        <li>
+                          <a>Settings</a>
+                        </li>
+                      ) : null}
                       <NavLink to="/logout">
                         <li>
                           <a>Logout</a>
@@ -207,12 +213,12 @@ export default function Navbar() {
 
             {currentUser ? (
               <div
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 "
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
                 onM
               >
                 <div
-                  className={`dropdown dropdown-end relative ${styles.profilePhoto} flex items-center justify-center`}
+                  className={`dropdown dropdown-end ${styles.profilePhoto} flex items-center justify-center`}
                 >
                   <div
                     tabIndex={0}
@@ -228,7 +234,7 @@ export default function Navbar() {
                   </div>
                   {showProfileMenu && (
                     <ul
-                      className="menu menu-sm first-color rounded-lg z-[1] mt-3 max-w-fit p-2 shadow absolute bottom-[-230%] left-0"
+                      className="menu menu-sm first-color rounded-lg z-[30] mt-3 max-w-fit p-2 shadow absolute top-[2.80rem] left-0"
                       onMouseLeave={() => setShowProfileMenu(false)}
                     >
                       <NavLink to="/profile">
@@ -239,9 +245,11 @@ export default function Navbar() {
                           </a>
                         </li>
                       </NavLink>
-                      <li>
-                        <a>Settings</a>
-                      </li>
+                      {currentPath == "/profile" ? (
+                        <li>
+                          <a>Settings</a>
+                        </li>
+                      ) : null}
                       <NavLink to="/logout">
                         <li>
                           <a>Logout</a>
