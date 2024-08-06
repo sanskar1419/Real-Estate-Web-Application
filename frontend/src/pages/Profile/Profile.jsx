@@ -101,8 +101,8 @@ export default function Profile() {
       className={`w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex justify-center sm:min-h-[90vh] lg:flex-row bg-blue-gradient text-[#adbbda]`}
     >
       <div className=" bg-[url('./assets/images/background5.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
-      <div className="w-[100%] flex flex-wrap justify-around gap-5 overflow-y-auto no-scrollbar p-7">
-        <div className="w-[90%] md:w-[30%] sm:w-[80%] rounded-2xl third-color shadow-inner shadow-black flex flex-col justify-center items-center gap-1">
+      <div className="w-[100%] flex flex-wrap  justify-around lg:justify-start gap-5 overflow-y-auto no-scrollbar p-7 flex-row lg:flex-col">
+        <div className="w-[90%] xl:w-[30%] lg:w-[40%] md:w-[80%] sm:w-[80%]  rounded-2xl third-color shadow-inner shadow-black flex flex-col justify-center items-center gap-1 p-3">
           <input
             type="file"
             accept="image/*"
@@ -137,8 +137,33 @@ export default function Profile() {
             <div> {currentUser.email}</div>
           </div>
         </div>
-        <div className="w-[90%] md:w-[65%] sm:w-[80%] rounded-lg third-color shadow-inner shadow-black bg-blend-darken"></div>
-        <div className="w-[90%] md:w-[90%] sm:w-[80%] rounded-lg "></div>
+        <div className="w-[90%] xl:w-[30%] lg:w-[40%] min-[1000px]:w-[40%] sm:w-[80%]  rounded-2xl third-color shadow-inner shadow-black bg-blend-darken flex items-start justify-center cursive flex-wrap p-4">
+          <div className="w-[50%] mb-3">
+            <div className="text-xs font-semibold">User Name</div>
+            <div className="text-sm">{currentUser.username}</div>
+          </div>
+          <div className="w-[50%] mb-3">
+            <div className="text-xs font-semibold">Date Of Birth</div>
+            <div className="text-sm">{currentUser.dob || "dd-mm-yy"}</div>
+          </div>
+          <div className="w-[50%] mb-3">
+            <div className="text-xs font-semibold">Mobile Number</div>
+            <div className="text-sm mb-4">
+              {currentUser.phoneNumber || "1234564789"}
+            </div>
+          </div>
+          <div className="w-[50%] mb-3">
+            <div className="text-xs font-semibold">Address</div>
+            <div className="text-sm">
+              {currentUser.address || "Place, City Country"}
+            </div>
+          </div>
+          <div className="">
+            <div className="text-xs font-semibold">City</div>
+            <div className="text-sm">{currentUser.city || "Mumbai"}</div>
+          </div>
+        </div>
+        <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%] outline  rounded-lg  "></div>
       </div>
       <div />
     </div>
