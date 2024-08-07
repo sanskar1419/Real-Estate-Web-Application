@@ -7,7 +7,10 @@ import Logo from "../Logo/Logo";
 import homeImage from "../../assets/images/home.png";
 import logInImage from "../../assets/images/log-in.png";
 import aboutImage from "../../assets/images/about2.png";
-import { getSettingMenu } from "../../redux/slices/settingMenu.slice";
+import {
+  getSettingMenu,
+  settingMenuActions,
+} from "../../redux/slices/settingMenu.slice";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -17,8 +20,6 @@ export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
   const [toggleMenuButton, setToggleMenuButton] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
-  console.log(settingMenu);
 
   return (
     <>
@@ -99,7 +100,11 @@ export default function Navbar() {
                         </li>
                       </NavLink>
                       {currentPath == "/profile" ? (
-                        <li>
+                        <li
+                          onClick={() =>
+                            dispatch(settingMenuActions.showMenu())
+                          }
+                        >
                           <a>Settings</a>
                         </li>
                       ) : null}
