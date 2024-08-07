@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import { IoReorderThreeOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../redux/slices/user.slice";
 import styles from "./Navbar.module.css";
-import logo from "../../assets/images/Dwellio_transparent-.png";
 import Logo from "../Logo/Logo";
 import homeImage from "../../assets/images/home.png";
 import logInImage from "../../assets/images/log-in.png";
 import aboutImage from "../../assets/images/about2.png";
-import RightIconNavbar from "../RightIconNavbar/RightIconNavbar";
-import RightNavLogo from "../RightNavLogo/RightNavLogo";
+import { getSettingMenu } from "../../redux/slices/settingMenu.slice";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
-
-  console.log("Path :" + currentPath);
+  const settingMenu = useSelector(getSettingMenu);
   const currentUser = useSelector(getCurrentUser);
   const [toggleMenuButton, setToggleMenuButton] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  console.log(settingMenu);
 
   return (
     <>

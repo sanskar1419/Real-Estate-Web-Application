@@ -3,10 +3,12 @@ import { userReducer } from "./slices/user.slice.js";
 import { notificationReducer } from "./slices/notification.slice.js";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import { settingMenuReducers } from "./slices/settingMenu.slice.js";
 
 const rootReducer = combineReducers({
   user: userReducer,
   notification: notificationReducer,
+  settingMenu: settingMenuReducers,
 });
 
 const persistConfig = {
