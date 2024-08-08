@@ -147,7 +147,7 @@ export default function Profile() {
             <div> {currentUser.email}</div>
           </div>
         </div>
-        <div className="w-[90%] xl:w-[30%] lg:w-[40%] min-[1000px]:w-[40%] sm:w-[80%]  rounded-2xl third-color shadow-inner shadow-black bg-blend-darken flex items-start justify-center cursive flex-wrap p-4">
+        <div className="w-[90%] xl:w-[30%] lg:w-[40%] md:w-[80%] sm:w-[80%] rounded-2xl third-color shadow-inner shadow-black bg-blend-darken flex items-start justify-center cursive flex-wrap p-4">
           <div className="w-[50%] mb-3">
             <div className="text-xs font-semibold">User Name</div>
             <div className="text-sm">{currentUser.username}</div>

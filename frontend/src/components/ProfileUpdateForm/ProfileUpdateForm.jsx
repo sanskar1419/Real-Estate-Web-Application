@@ -20,11 +20,11 @@ export default function ProfileUpdateForm({ handleFormData, formData }) {
     setShowPassword(!showPassword);
   };
   return (
-    <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%] cursive xl:max-h-full text-[#adbbda] flex flex-col ">
+    <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%] cursive lg:max-h-full text-[#adbbda] flex flex-col ">
       <div className="text-2xl text-first">Update Profile</div>
       <div className="divider divider-secondary"></div>
 
-      <form className="flex flex-col gap-3 xl:overflow-y-auto xl:no-scrollbar max-h-[61%]">
+      <form className="flex flex-col gap-3 lg:overflow-y-auto lg:no-scrollbar lg:max-h-[61%]">
         <div className="flex flex-col  xl:flex-row gap-2">
           <div className="w-full xl:w-[50%]">
             <div className="mb-3 text-sm text-second">First Name</div>
