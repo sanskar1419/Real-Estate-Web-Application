@@ -249,7 +249,11 @@ export default function Navbar() {
                         </li>
                       </NavLink>
                       {currentPath == "/profile" ? (
-                        <li>
+                        <li
+                          onClick={() =>
+                            dispatch(settingMenuActions.showMenu())
+                          }
+                        >
                           <a>Settings</a>
                         </li>
                       ) : null}
