@@ -13,6 +13,7 @@ import {
 import { app } from "../../firebase";
 import SettingMenu from "../../components/SettingMenu/SettingMenu";
 import { getSettingMenu } from "../../redux/slices/settingMenu.slice";
+import ProfileUpdateForm from "../../components/ProfileUpdateForm/ProfileUpdateForm";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function Profile() {
   const [fileUploadPercentage, setFileUploadPercentage] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(undefined);
   const [fileUploadSuccess, setFileUploadSuccess] = useState(undefined);
+  const [edit, setEdit] = useState(false);
   const showMenu = useSelector(getSettingMenu);
 
   useEffect(() => {
@@ -106,8 +108,8 @@ export default function Profile() {
       <div className=" bg-[url('./assets/images/background5.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
       <div className="w-[100%] flex flex-wrap  justify-around lg:justify-start gap-5 overflow-y-auto no-scrollbar p-7 flex-row lg:flex-col relative">
         {showMenu && (
-          <div className="absolute top-2 left-0">
-            <SettingMenu />
+          <div className="fixed top-[4.2rem] left-0 z-[999]">
+            <SettingMenu setEdit={setEdit} />
           </div>
         )}
         <div className="w-[90%] xl:w-[30%] lg:w-[40%] md:w-[80%] sm:w-[80%]  rounded-2xl third-color shadow-inner shadow-black flex flex-col justify-center items-center gap-1 p-3">
@@ -171,7 +173,16 @@ export default function Profile() {
             <div className="text-sm">{currentUser.city || "Mumbai"}</div>
           </div>
         </div>
-        <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%] outline  rounded-lg  "></div>
+        {edit ? (
+          <ProfileUpdateForm
+            formData={formData}
+            handleFormData={handleFormData}
+          />
+        ) : (
+          <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%]  rounded-lg  ">
+            Listings
+          </div>
+        )}
       </div>
       <div />
     </div>
