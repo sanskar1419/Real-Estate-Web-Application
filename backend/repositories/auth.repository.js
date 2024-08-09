@@ -7,6 +7,7 @@ export default class AuthRepository {
       return newUser;
     } catch (error) {
       console.log(error);
+      throw new Error("Something went wrong with database");
     }
   }
 
@@ -16,6 +17,7 @@ export default class AuthRepository {
       return user;
     } catch (error) {
       console.log(error);
+      throw new Error("Something went wrong with database");
     }
   }
 }

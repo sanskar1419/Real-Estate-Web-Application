@@ -28,6 +28,7 @@ export default class UserRepository {
       return updatedUser;
     } catch (error) {
       console.log(error);
+      throw new Error("Something went wrong with database");
     }
   }
 
@@ -36,6 +37,7 @@ export default class UserRepository {
       return await User.findById(id);
     } catch (error) {
       console.log(error);
+      throw new Error("Something went wrong with database");
     }
   }
 
@@ -44,6 +46,7 @@ export default class UserRepository {
       await User.findByIdAndDelete(id);
     } catch (error) {
       console.log(error);
+      throw new Error("Something went wrong with database");
     }
   }
 }
