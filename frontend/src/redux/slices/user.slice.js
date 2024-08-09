@@ -39,6 +39,16 @@ export const userSlice = createSlice({
     deleteError: (state, action) => {
       state.loading = false;
     },
+    logoutStart: (state, action) => {
+      state.loading = true;
+    },
+    logoutSuccess: (state, action) => {
+      state.loading = false;
+      state.currentUser = null;
+    },
+    logoutError: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 

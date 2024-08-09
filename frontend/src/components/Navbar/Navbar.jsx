@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "../../redux/slices/user.slice";
+import { getCurrentUser, userActions } from "../../redux/slices/user.slice";
 import styles from "./Navbar.module.css";
 import Logo from "../Logo/Logo";
 import homeImage from "../../assets/images/home.png";
@@ -20,6 +20,23 @@ export default function Navbar() {
   const currentUser = useSelector(getCurrentUser);
   const [toggleMenuButton, setToggleMenuButton] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      dispatch(userActions.logoutStart());
+      const res = await fetch("/api/auth/logout");
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(userActions.logoutError(data.message));
+        return;
+      }
+      dispatch(userActions.logoutSuccess(data));
+      localStorage.removeItem("logged-in-user");
+    } catch (error) {
+      dispatch(userActions.logoutError(error.message));
+    }
+  };
 
   return (
     <>
@@ -107,11 +124,9 @@ export default function Navbar() {
                           <a>Settings</a>
                         </li>
                       ) : null}
-                      <NavLink to="/logout">
-                        <li>
-                          <a>Logout</a>
-                        </li>
-                      </NavLink>
+                      <li onClick={handleLogout}>
+                        <a>Logout</a>
+                      </li>
                     </ul>
                   )}
                 </div>
@@ -256,11 +271,9 @@ export default function Navbar() {
                           <a>Settings</a>
                         </li>
                       ) : null}
-                      <NavLink to="/logout">
-                        <li>
-                          <a>Logout</a>
-                        </li>
-                      </NavLink>
+                      <li onClick={handleLogout}>
+                        <a>Logout</a>
+                      </li>
                     </ul>
                   )}
                 </div>

@@ -42,6 +42,12 @@ const notificationSlice = createSlice({
       })
       .addCase(userActions.deleteError, (state, action) => {
         state.error = action.payload;
+      })
+      .addCase(userActions.logoutSuccess, (state, action) => {
+        state.message = "🙌🙌Logout Successfully🙌🙌";
+      })
+      .addCase(userActions.logoutError, (state, action) => {
+        state.error = action.payload;
       });
   },
 });

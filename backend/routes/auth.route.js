@@ -25,7 +25,7 @@ authRouter.post("/github", (req, res, next) => {
   authController.githubAuth(req, res, next);
 });
 
-authRouter.post("/logout", (req, res, next) => {
+authRouter.get("/logout", (req, res, next) => {
   authController.logOut(req, res, next);
 });
 
