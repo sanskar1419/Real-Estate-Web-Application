@@ -35,7 +35,6 @@ export default class UserController {
 
   async deleteUser(req, res, next) {
     try {
-      console.log("hii");
       if (req.params.id != req.user.userId)
         return next(errorHandler(400, "You can delete only your own account"));
       const user = await this.userRepository.findUserById(req.params.id);
