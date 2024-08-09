@@ -109,7 +109,7 @@ export default function ProfileUpdateForm({
             <label className="input input-bordered flex items-center gap-2 rounded-lg">
               <img alt="id card" src={phoneImg} className="w-4" />
               <input
-                type="number"
+                type="text"
                 id="phoneNumber"
                 className="grow"
                 placeholder="Phone Number"
