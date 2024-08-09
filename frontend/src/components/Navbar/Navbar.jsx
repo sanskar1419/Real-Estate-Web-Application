@@ -69,7 +69,6 @@ export default function Navbar() {
               <div
                 className="flex items-center gap-1"
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                onM
               >
                 <div
                   className={`dropdown dropdown-end relative ${styles.profilePhoto} flex items-center justify-center`}

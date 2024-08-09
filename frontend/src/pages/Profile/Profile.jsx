@@ -60,7 +60,6 @@ export default function Profile() {
               body: JSON.stringify({ avatar: downloadURL }),
             });
             const data = await res.json();
-            console.log(data);
             if (data.success === false) {
               dispatch(userActions.updateError(data.message));
               return;

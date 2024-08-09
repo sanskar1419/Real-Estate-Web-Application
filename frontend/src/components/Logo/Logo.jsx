@@ -25,7 +25,9 @@ export default function Logo() {
       <div className={`${styles.text}`}>
         <p id="text">
           {charArray.map((char, i) => (
-            <span style={{ transform: `rotate(${i * 23}deg)` }}>{char}</span>
+            <span style={{ transform: `rotate(${i * 23}deg)` }} key={i}>
+              {char}
+            </span>
           ))}
         </p>
       </div>

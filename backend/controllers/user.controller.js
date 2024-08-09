@@ -9,7 +9,6 @@ export default class UserController {
 
   async updateUser(req, res, next) {
     try {
-      console.log(req.params);
       if (req.user.userId !== req.params.id)
         return next(errorHandler(401, "You can only update your own account!"));
 
