@@ -11,6 +11,12 @@ export default class AuthController {
   async signUp(req, res, next) {
     try {
       const { username, email, password, confirmPassword } = req.body;
+      const validUser = await this.authRepository.findByEmail(email);
+      if (validUser) return next(errorHandler("400", "User Already Exist"));
+      // if (password !== confirmPassword)
+      //   return next(
+      //     errorHandler("400", "Password and confirm password mismatch")
+      //   );
       const hashedPassword = bcryptjs.hashSync(password, 10);
       const newUser = await this.authRepository.add({
         username,
@@ -18,7 +24,11 @@ export default class AuthController {
         password: hashedPassword,
       });
 
+      if (!newUser) return next(errorHandler(500, "Something went wrong"));
+      generateTokenAndSetCookie(newUser._id, res);
+
       const { password: pass, ...rest } = newUser._doc;
+
       res.status(201).json(rest);
     } catch (error) {
       console.log(error);

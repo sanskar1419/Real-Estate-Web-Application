@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { getCurrentUser } from "../../redux/slices/user.slice";
+import {
+  getCurrentUser,
+  getUserLoadingState,
+} from "../../redux/slices/user.slice";
 import idImg from "../../assets/images/id-card.png";
 import phoneImg from "../../assets/images/24-hours.png";
 import calenderImg from "../../assets/images/calendar.png";
@@ -18,6 +21,7 @@ export default function ProfileUpdateForm({
   handleSubmit,
 }) {
   const currentUser = useSelector(getCurrentUser);
+  const loading = useSelector(getUserLoadingState);
   const [showPassword, setShowPassword] = useState(false);
 
   const handlePasswordClick = () => {
@@ -176,6 +180,7 @@ export default function ProfileUpdateForm({
         <button
           className="btn btn-outline btn-success btn-sm rounded-lg"
           onClick={() => handleSubmit()}
+          disabled={loading}
         >
           Update
         </button>
