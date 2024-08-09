@@ -13,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Notification from "./components/Notifications/Notification.jsx";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "./redux/slices/user.slice.js";
+import AddNewProperty from "./pages/AddNewProperty/AddNewProperty.jsx";
 
 export default function App() {
   const currentUser = useSelector(getCurrentUser);
@@ -40,6 +41,10 @@ export default function App() {
         {
           path: "/profile",
           element: currentUser ? <Profile /> : <Navigate to="/" />,
+        },
+        {
+          path: "/create-property",
+          element: currentUser ? <AddNewProperty /> : <Navigate to="/" />,
         },
       ],
     },

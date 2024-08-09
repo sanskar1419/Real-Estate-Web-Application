@@ -8,6 +8,7 @@ import addPropertyImg from "../../assets/images/new.png";
 import { useDispatch } from "react-redux";
 import { settingMenuActions } from "../../redux/slices/settingMenu.slice";
 import ConfirmationModel from "../ConfirmationModel/ConfirmationModel";
+import { Link } from "react-router-dom";
 
 export default function SettingMenu({ setEdit }) {
   const dispatch = useDispatch();
@@ -34,12 +35,13 @@ export default function SettingMenu({ setEdit }) {
         />
       )}
       <li className=" z-10">
-        <a
+        <Link
+          to="/create-property"
           className="tooltip tooltip-right z-[999]"
           data-tip="Add New Property"
         >
           <img alt="edit" src={addPropertyImg} className="w-5 h-5 " />
-        </a>
+        </Link>
       </li>
       <li
         onClick={() => dispatch(settingMenuActions.hideMenu())}
