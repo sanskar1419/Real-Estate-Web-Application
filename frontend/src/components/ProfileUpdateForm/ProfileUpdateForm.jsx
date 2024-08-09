@@ -13,6 +13,7 @@ import passwordImg from "../../assets/images/password.png";
 import PasswordInput from "../PasswordInput/PasswordInput";
 import eye from "../../assets/images/eyeU.png";
 import hidden from "../../assets/images/hiddenU.png";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default function ProfileUpdateForm({
   handleFormData,
@@ -178,11 +179,11 @@ export default function ProfileUpdateForm({
           Cancel
         </button>
         <button
-          className="btn btn-outline btn-success btn-sm rounded-lg"
+          className="btn btn-outline btn-success btn-sm rounded-lg flex items-center justify-center"
           onClick={() => handleSubmit()}
           disabled={loading}
         >
-          Update
+          {loading ? <PulseLoader /> : " Update"}
         </button>
       </div>
     </div>
