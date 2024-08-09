@@ -29,6 +29,16 @@ export const userSlice = createSlice({
     updateError: (state, action) => {
       state.loading = false;
     },
+    deleteStart: (state, action) => {
+      state.loading = true;
+    },
+    deleteSuccess: (state, action) => {
+      state.loading = false;
+      state.currentUser = null;
+    },
+    deleteError: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 

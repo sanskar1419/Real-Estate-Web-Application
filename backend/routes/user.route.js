@@ -9,7 +9,7 @@ const userController = new UserController();
 userRouter.post("/update/:id", verifyJwt, (req, res, next) => {
   userController.updateUser(req, res, next);
 });
-userRouter.post("/delete/:id", verifyJwt, (req, res, next) => {
+userRouter.delete("/delete/:id", verifyJwt, (req, res, next) => {
   userController.deleteUser(req, res, next);
 });
 

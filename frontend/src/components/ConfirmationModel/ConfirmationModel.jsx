@@ -1,12 +1,33 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { getCurrentUser } from "../../redux/slices/user.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser, userActions } from "../../redux/slices/user.slice";
 
 export default function ConfirmationModel({
   setShowConfirmationModel,
   confirmationMessage,
 }) {
   const currentUser = useSelector(getCurrentUser);
+  const dispatch = useDispatch();
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(userActions.deleteStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(userActions.updateError(data.message));
+        return;
+      }
+      dispatch(userActions.deleteSuccess(data));
+      localStorage.removeItem("logged-in-user");
+    } catch (error) {
+      console.log(error);
+      dispatch(userActions.deleteError(error.message));
+    }
+  };
   return (
     <dialog
       id="my_modal_4"
@@ -18,7 +39,7 @@ export default function ConfirmationModel({
         </h3>
         <p className="py-4">{confirmationMessage}</p>
         <div className="w-full">
-          <form className="flex gap-2 justify-end">
+          <div className="flex gap-2 justify-end">
             {/* if there is a button, it will close the modal */}
             <button
               className="btn btn-outline btn-error btn-sm rounded-lg"
@@ -26,10 +47,13 @@ export default function ConfirmationModel({
             >
               Cancel
             </button>
-            <button className="btn btn-outline btn-success btn-sm rounded-lg flex items-center justify-center">
+            <button
+              className="btn btn-outline btn-success btn-sm rounded-lg flex items-center justify-center"
+              onClick={handleDeleteUser}
+            >
               Proceed
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </dialog>

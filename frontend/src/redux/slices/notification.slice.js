@@ -36,6 +36,12 @@ const notificationSlice = createSlice({
       })
       .addCase(userActions.updateError, (state, action) => {
         state.error = action.payload;
+      })
+      .addCase(userActions.deleteSuccess, (state, action) => {
+        state.message = "😔😔😔Sad to see you go 😔😔😔";
+      })
+      .addCase(userActions.deleteError, (state, action) => {
+        state.error = action.payload;
       });
   },
 });
