@@ -20,6 +20,7 @@ import {
   notificationAction,
 } from "../../redux/slices/notification.slice";
 import toast from "react-hot-toast";
+import Property from "../../components/Property/Property";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -218,9 +219,7 @@ export default function Profile() {
             handleSubmit={handleSubmit}
           />
         ) : (
-          <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%]  rounded-lg  ">
-            Listings
-          </div>
+          <Property />
         )}
       </div>
       <div />

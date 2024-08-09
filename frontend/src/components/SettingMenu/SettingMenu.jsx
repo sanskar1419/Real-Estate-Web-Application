@@ -4,6 +4,7 @@ import updateImg from "../../assets/images/updated.png";
 import editImg from "../../assets/images/edit.png";
 import deleteImg from "../../assets/images/delete.png";
 import cancelImg from "../../assets/images/cancel.png";
+import addPropertyImg from "../../assets/images/new.png";
 import { useDispatch } from "react-redux";
 import { settingMenuActions } from "../../redux/slices/settingMenu.slice";
 import ConfirmationModel from "../ConfirmationModel/ConfirmationModel";
@@ -32,6 +33,14 @@ export default function SettingMenu({ setEdit }) {
           confirmationMessage="Are you sure want to delete your account?"
         />
       )}
+      <li className=" z-10">
+        <a
+          className="tooltip tooltip-right z-[999]"
+          data-tip="Add New Property"
+        >
+          <img alt="edit" src={addPropertyImg} className="w-5 h-5 " />
+        </a>
+      </li>
       <li
         onClick={() => dispatch(settingMenuActions.hideMenu())}
         className=" z-10"
