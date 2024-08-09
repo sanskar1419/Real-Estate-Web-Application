@@ -11,7 +11,12 @@ import PasswordInput from "../PasswordInput/PasswordInput";
 import eye from "../../assets/images/eyeU.png";
 import hidden from "../../assets/images/hiddenU.png";
 
-export default function ProfileUpdateForm({ handleFormData, formData }) {
+export default function ProfileUpdateForm({
+  handleFormData,
+  formData,
+  setEdit,
+  handleSubmit,
+}) {
   const currentUser = useSelector(getCurrentUser);
   const [showPassword, setShowPassword] = useState(false);
   console.log(formData);
@@ -163,10 +168,16 @@ export default function ProfileUpdateForm({ handleFormData, formData }) {
       <div className="divider divider-secondary"></div>
 
       <div className="flex justify-end gap-4">
-        <button className="btn btn-outline btn-error btn-sm rounded-lg">
+        <button
+          className="btn btn-outline btn-error btn-sm rounded-lg"
+          onClick={() => setEdit(false)}
+        >
           Cancel
         </button>
-        <button className="btn btn-outline btn-success btn-sm rounded-lg">
+        <button
+          className="btn btn-outline btn-success btn-sm rounded-lg"
+          onClick={() => handleSubmit()}
+        >
           Update
         </button>
       </div>

@@ -12,7 +12,7 @@ export default class UserController {
       if (req.user.userId !== req.params.id)
         return next(errorHandler(401, "You can only update your own account!"));
 
-      if (req.body.password) {
+      if (req.body.password && req.body.password != "") {
         req.body.password = bcryptjs.hashSync(req.body.password, 10);
       }
 

@@ -91,9 +91,8 @@ export default function Profile() {
     }
   }, [fileUploadError, fileUploadSuccess]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     try {
-      e.preventDefault();
       dispatch(userActions.updateStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
@@ -196,6 +195,8 @@ export default function Profile() {
           <ProfileUpdateForm
             formData={formData}
             handleFormData={handleFormData}
+            setEdit={setEdit}
+            handleSubmit={handleSubmit}
           />
         ) : (
           <div className=" w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%]  rounded-lg  ">
