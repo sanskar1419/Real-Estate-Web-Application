@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "../../redux/slices/user.slice";
+import { getCurrentUser, userActions } from "../../redux/slices/user.slice";
 import ProfileInformation from "../../components/ProfileInformation/ProfileInformation";
 import { randomBackgroundPicker } from "../../utils/randomBackground";
 import styles from "./Profile.module.css";
@@ -48,10 +48,30 @@ export default function Profile() {
         setFileUploadError("Error Image upload (image must be less than 2 mb)");
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setFileUploadSuccess("Image successfully uploaded!");
-          setFormData({ ...formData, avatar: downloadURL });
-        });
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then(async (downloadURL) => {
+            setFileUploadSuccess("Image successfully uploaded!");
+            setFormData({ ...formData, avatar: downloadURL });
+            const res = await fetch(`/api/user/update/${currentUser._id}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ avatar: downloadURL }),
+            });
+            const data = await res.json();
+            console.log(data);
+            if (data.success === false) {
+              dispatch(userActions.updateError(data.message));
+              return;
+            }
+            dispatch(userActions.updateSuccess(data));
+            localStorage.setItem("logged-in-user", JSON.stringify(data));
+          })
+          .catch((error) => {
+            console.log(error);
+            dispatch(userActions.updateError(error.message));
+          });
       }
     );
   };
