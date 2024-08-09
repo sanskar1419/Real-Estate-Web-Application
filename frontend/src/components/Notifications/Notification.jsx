@@ -8,6 +8,7 @@ export default function Notification() {
         position="bottom-right"
         reverseOrder={true}
         toastOptions={{
+          duration: 5000,
           success: {
             style: {
               minWidth: "400px",
