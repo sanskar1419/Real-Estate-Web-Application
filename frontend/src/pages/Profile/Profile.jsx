@@ -14,6 +14,12 @@ import { app } from "../../firebase";
 import SettingMenu from "../../components/SettingMenu/SettingMenu";
 import { getSettingMenu } from "../../redux/slices/settingMenu.slice";
 import ProfileUpdateForm from "../../components/ProfileUpdateForm/ProfileUpdateForm";
+import {
+  getError,
+  getMessage,
+  notificationAction,
+} from "../../redux/slices/notification.slice";
+import toast from "react-hot-toast";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -26,6 +32,19 @@ export default function Profile() {
   const [fileUploadSuccess, setFileUploadSuccess] = useState(undefined);
   const [edit, setEdit] = useState(false);
   const showMenu = useSelector(getSettingMenu);
+  const error = useSelector(getError);
+  const message = useSelector(getMessage);
+
+  useEffect(() => {
+    if (message != null) {
+      toast.success(message);
+      dispatch(notificationAction.resetMessage());
+    }
+    if (error != null) {
+      toast.error(error);
+      dispatch(notificationAction.resetError());
+    }
+  }, [message, error]);
 
   useEffect(() => {
     if (file) handleFileUpload(file);

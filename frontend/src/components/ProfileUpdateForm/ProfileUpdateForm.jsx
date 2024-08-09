@@ -19,7 +19,6 @@ export default function ProfileUpdateForm({
 }) {
   const currentUser = useSelector(getCurrentUser);
   const [showPassword, setShowPassword] = useState(false);
-  console.log(formData);
 
   const handlePasswordClick = () => {
     setShowPassword(!showPassword);
