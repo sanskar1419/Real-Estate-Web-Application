@@ -32,4 +32,20 @@ export default class UserController {
       next(error);
     }
   }
+
+  async deleteUser(req, res, next) {
+    try {
+      if (req.params.id != req.user.userId)
+        return next(errorHandler(400, "You can delete only your own account"));
+      const user = await this.userRepository.findUserById(req.params.id);
+      if (!user) next(errorHandler(400, "User does not exist"));
+
+      await this.userRepository.findUserByIdAndDelete(req.params.id);
+      res.clearCookie("access_token");
+      res.status(200).json("User has been deleted!");
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }

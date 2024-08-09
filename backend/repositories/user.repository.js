@@ -30,4 +30,20 @@ export default class UserRepository {
       console.log(error);
     }
   }
+
+  async findUserById(id) {
+    try {
+      return await User.findById(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async findUserByIdAndDelete(id) {
+    try {
+      await User.findByIdAndDelete(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
