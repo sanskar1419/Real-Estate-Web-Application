@@ -9,11 +9,20 @@ import {
 import toast from "react-hot-toast";
 import idImg from "../../assets/images/id-card.png";
 import locationImg from "../../assets/images/location.png";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../../firebase";
 
 export default function AddNewProperty() {
   const dispatch = useDispatch();
   const error = useSelector(getError);
   const message = useSelector(getMessage);
+  const [files, setFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     imageUrls: [],
     name: "",
@@ -29,6 +38,8 @@ export default function AddNewProperty() {
     furnished: false,
   });
 
+  console.log(formData);
+
   useEffect(() => {
     if (message != null) {
       toast.success(message);
@@ -39,6 +50,70 @@ export default function AddNewProperty() {
       dispatch(notificationAction.resetError());
     }
   }, [message, error]);
+
+  const handleImageSubmit = (e) => {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+      setUploading(true);
+      // setImageUploadError(false);
+      const promises = [];
+
+      for (let i = 0; i < files.length; i++) {
+        promises.push(storeImage(files[i]));
+      }
+      Promise.all(promises)
+        .then((urls) => {
+          setFormData({
+            ...formData,
+            imageUrls: formData.imageUrls.concat(urls),
+          });
+          dispatch(
+            notificationAction.setMessage(
+              "🙌🙌🙌Hurray all files are uploaded successfully🙌🙌🙌"
+            )
+          );
+          setUploading(false);
+        })
+        .catch((err) => {
+          dispatch(
+            notificationAction.setError(
+              "Image upload failed (2 mb max per image)"
+            )
+          );
+          // setImageUploadError("Image upload failed (2 mb max per image)");
+          setUploading(false);
+        });
+    } else {
+      dispatch(
+        notificationAction.setError("You can only upload 6 images per property")
+      );
+      setUploading(false);
+    }
+  };
+
+  const storeImage = async (file) => {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  };
   return (
     <div
       className={`w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex justify-center sm:min-h-[90vh] lg:flex-row bg-blue-gradient text-[#adbbda]`}
@@ -220,7 +295,7 @@ export default function AddNewProperty() {
           <div className="flex flex-col flex-1 gap-4 max-h-full overflow-y-auto no-scrollbar">
             <p className="text-sm text-second">
               Images:
-              <span className="ml-2">
+              <span className="ml-2 text-[#adbbda]">
                 The first image will be the cover (max 6)
               </span>
             </p>
@@ -231,14 +306,14 @@ export default function AddNewProperty() {
                 id="images"
                 accept="image/*"
                 multiple
-                //   onChange={(e) => setFiles(e.target.files)}
+                onChange={(e) => setFiles(e.target.files)}
               />
               <button
+                type="button"
                 className="btn btn-outline btn-success rounded-lg"
-                onClick={() => setEdit(false)}
+                onClick={handleImageSubmit}
               >
-                {/* {uploading ? "Uploading..." : "Upload"} */}
-                Upload
+                {uploading ? "Uploading..." : "Upload"}
               </button>
             </div>
             {/* <p className="text-red-700 text-sm">
