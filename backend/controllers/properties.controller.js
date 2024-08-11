@@ -8,9 +8,12 @@ export default class PropertyController {
 
   async createNewProperty(req, res, next) {
     try {
-      const property = await this.propertiesRepository.create({ ...req.body });
+      console.log(req.body);
+      const property = await this.propertiesRepository.create({
+        ...req.body,
+        userRef: req.user.userId,
+      });
       if (!property) next(errorHandler("400", "Unable add new property"));
-
       return res.status(201).json(property);
     } catch (error) {
       console.log(error);

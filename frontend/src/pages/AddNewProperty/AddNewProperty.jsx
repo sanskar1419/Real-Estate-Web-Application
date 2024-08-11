@@ -17,6 +17,7 @@ import {
 } from "firebase/storage";
 import { app } from "../../firebase";
 import ImagePreview from "../../components/ImagePreview/ImagePreview";
+import { propertyActions } from "../../redux/slices/propertySlice";
 
 export default function AddNewProperty() {
   const dispatch = useDispatch();
@@ -157,7 +158,25 @@ export default function AddNewProperty() {
 
   const handleSubmit = async (e) => {
     try {
-    } catch (error) {}
+      e.preventDefault();
+      dispatch(propertyActions.addStart());
+      const res = await fetch("/api/properties/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(propertyActions.addError(data.message));
+        return;
+      }
+      dispatch(propertyActions.addSuccess(data));
+    } catch (error) {
+      dispatch(propertyActions.addError(error.message));
+    }
   };
 
   return (
@@ -178,7 +197,7 @@ export default function AddNewProperty() {
         </h1>
         <div className="divider divider-accent"></div>
         <form
-          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           className="flex flex-col lg:flex-row gap-8 overflow-y-auto no-scrollbar max-h-[80%]"
         >
           <div className="flex flex-col gap-4 flex-1 lg:max-h-full lg:overflow-y-auto lg:no-scrollbar lg:pb-5">
