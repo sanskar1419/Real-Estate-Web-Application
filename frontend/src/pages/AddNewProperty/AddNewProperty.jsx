@@ -22,9 +22,11 @@ import {
   propertyActions,
 } from "../../redux/slices/propertySlice";
 import RiseLoader from "react-spinners/RiseLoader";
+import { useNavigate } from "react-router-dom";
 
 export default function AddNewProperty() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const error = useSelector(getError);
   const message = useSelector(getMessage);
   const [files, setFiles] = useState([]);
@@ -45,8 +47,6 @@ export default function AddNewProperty() {
   });
   const [showImagePreviewIndex, setShowImagePreviewIndex] = useState(-1);
   const loading = useSelector(getPropertyLoadingState);
-
-  console.log(formData);
 
   useEffect(() => {
     if (message != null) {
@@ -191,6 +191,7 @@ export default function AddNewProperty() {
         return;
       }
       dispatch(propertyActions.addSuccess(data));
+      navigate(`/create-property/${data._id}`);
     } catch (error) {
       dispatch(propertyActions.addError(error.message));
     }
