@@ -117,6 +117,13 @@ export default function AddNewProperty() {
     });
   };
 
+  const handleRemoveImage = (index) => {
+    setFormData({
+      ...formData,
+      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+    });
+  };
+
   return (
     <div
       className={`w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex justify-center sm:min-h-[90vh] lg:flex-row bg-blue-gradient text-[#adbbda]`}
@@ -326,9 +333,7 @@ export default function AddNewProperty() {
                 {uploading ? "Uploading..." : "Upload"}
               </button>
             </div>
-            {/* <p className="text-red-700 text-sm">
-                {imageUploadError && imageUploadError}
-              </p> */}
+
             {formData.imageUrls.length > 0 &&
               formData.imageUrls.map((url, index) => (
                 <div
@@ -343,7 +348,7 @@ export default function AddNewProperty() {
                   />
                   <button
                     type="button"
-                    //   onClick={() => handleRemoveImage(index)}
+                    onClick={() => handleRemoveImage(index)}
                     className="btn btn-outline btn-error rounded-lg btn-sm"
                   >
                     Delete
