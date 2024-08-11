@@ -17,7 +17,11 @@ import {
 } from "firebase/storage";
 import { app } from "../../firebase";
 import ImagePreview from "../../components/ImagePreview/ImagePreview";
-import { propertyActions } from "../../redux/slices/propertySlice";
+import {
+  getPropertyLoadingState,
+  propertyActions,
+} from "../../redux/slices/propertySlice";
+import RiseLoader from "react-spinners/RiseLoader";
 
 export default function AddNewProperty() {
   const dispatch = useDispatch();
@@ -40,6 +44,7 @@ export default function AddNewProperty() {
     furnished: false,
   });
   const [showImagePreviewIndex, setShowImagePreviewIndex] = useState(-1);
+  const loading = useSelector(getPropertyLoadingState);
 
   console.log(formData);
 
@@ -159,6 +164,18 @@ export default function AddNewProperty() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+
+      if (formData.imageUrls.length < 1)
+        return dispatch(
+          notificationAction.setError("You must upload at least one image")
+        );
+      if (+formData.regularPrice < +formData.discountPrice)
+        return dispatch(
+          notificationAction.setError(
+            "Discount price must be lower than regular price"
+          )
+        );
+
       dispatch(propertyActions.addStart());
       const res = await fetch("/api/properties/create", {
         method: "POST",
@@ -415,9 +432,9 @@ export default function AddNewProperty() {
             <button
               className="btn btn-outline btn-success rounded-lg"
               type="submit"
+              disabled={loading || uploading}
             >
-              {/* {uploading ? "Uploading..." : "Upload"} */}
-              Create Property
+              {loading ? <RiseLoader /> : "Create Property"}
             </button>
           </div>
         </form>
