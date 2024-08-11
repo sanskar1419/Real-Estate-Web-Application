@@ -136,9 +136,9 @@ export default function AddNewProperty() {
         <div className="divider divider-accent"></div>
         <form
           // onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row gap-8 max-h-[80%]"
+          className="flex flex-col lg:flex-row gap-8 overflow-y-auto no-scrollbar max-h-[80%]"
         >
-          <div className="flex flex-col gap-4 flex-1 max-h-full overflow-y-auto no-scrollbar">
+          <div className="flex flex-col gap-4 flex-1 lg:max-h-full lg:overflow-y-auto lg:no-scrollbar">
             <div className="w-full">
               <div className="mb-3 text-sm text-second">First Name</div>
               <label className="input input-bordered flex items-center gap-2 rounded-lg">
@@ -302,7 +302,7 @@ export default function AddNewProperty() {
               )}
             </div>
           </div>
-          <div className="flex flex-col flex-1 gap-4 max-h-full overflow-y-auto no-scrollbar">
+          <div className="flex flex-col flex-1 gap-4 lg:max-h-full lg:overflow-y-auto lg:no-scrollbar pb-4">
             <p className="text-sm text-second">
               Images:
               <span className="ml-2 text-[#adbbda]">
