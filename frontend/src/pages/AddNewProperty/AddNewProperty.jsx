@@ -16,6 +16,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../../firebase";
+import ImagePreview from "../../components/ImagePreview/ImagePreview";
 
 export default function AddNewProperty() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export default function AddNewProperty() {
     parking: false,
     furnished: false,
   });
+  const [showImagePreviewIndex, setShowImagePreviewIndex] = useState(-1);
 
   console.log(formData);
 
@@ -114,11 +116,19 @@ export default function AddNewProperty() {
       );
     });
   };
+
   return (
     <div
       className={`w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex justify-center sm:min-h-[90vh] lg:flex-row bg-blue-gradient text-[#adbbda]`}
     >
       <div className=" bg-[url('./assets/images/background5.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
+      {showImagePreviewIndex != -1 && (
+        <ImagePreview
+          currentImageIndex={showImagePreviewIndex}
+          images={formData.imageUrls}
+          setShowImagePreviewIndex={setShowImagePreviewIndex}
+        />
+      )}
       <div className="p-5 max-w-[90%] xl:max-w-[75%] relative max-h-full cursive">
         <h1 className="text-3xl font-semibold text-center">
           Add A New Property
@@ -323,17 +333,18 @@ export default function AddNewProperty() {
               formData.imageUrls.map((url, index) => (
                 <div
                   key={url}
-                  className="flex justify-between p-3 border items-center"
+                  className="flex justify-between items-center px-5"
                 >
                   <img
                     src={url}
                     alt="listing image"
-                    className="w-20 h-20 object-contain rounded-lg"
+                    className="max-w-20 max-h-30 object-contain rounded-lg shadow-sm shadow-white cursor-pointer"
+                    onClick={() => setShowImagePreviewIndex(index)}
                   />
                   <button
                     type="button"
                     //   onClick={() => handleRemoveImage(index)}
-                    className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+                    className="btn btn-outline btn-error rounded-lg btn-sm"
                   >
                     Delete
                   </button>
