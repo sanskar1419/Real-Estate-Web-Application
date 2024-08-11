@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userActions } from "./user.slice";
+import { propertyActions } from "./propertySlice";
 
 const initialState = {
   message: null,
@@ -47,6 +48,12 @@ const notificationSlice = createSlice({
         state.message = "🙌🙌Logout Successfully🙌🙌";
       })
       .addCase(userActions.logoutError, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(propertyActions.addSuccess, (state, action) => {
+        state.message = "🙌🙌New property has been added successfully🙌🙌";
+      })
+      .addCase(propertyActions.addError, (state, action) => {
         state.error = action.payload;
       });
   },

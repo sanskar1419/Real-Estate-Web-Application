@@ -7,7 +7,7 @@ import {
   notificationAction,
 } from "../../redux/slices/notification.slice";
 import toast from "react-hot-toast";
-import idImg from "../../assets/images/id-card.png";
+import houseImg from "../../assets/images/house.png";
 import locationImg from "../../assets/images/location.png";
 import {
   getDownloadURL,
@@ -26,7 +26,7 @@ export default function AddNewProperty() {
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     imageUrls: [],
-    name: "",
+    propertyName: "",
     description: "",
     address: "",
     type: "rent",
@@ -124,6 +124,42 @@ export default function AddNewProperty() {
     });
   };
 
+  const handleChange = (e) => {
+    if (e.target.id === "sale" || e.target.id === "rent") {
+      setFormData({
+        ...formData,
+        type: e.target.id,
+      });
+    }
+
+    if (
+      e.target.id === "parking" ||
+      e.target.id === "furnished" ||
+      e.target.id === "offer"
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.checked,
+      });
+    }
+
+    if (
+      e.target.type === "number" ||
+      e.target.type === "text" ||
+      e.target.type === "textarea"
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+    } catch (error) {}
+  };
+
   return (
     <div
       className={`w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex justify-center sm:min-h-[90vh] lg:flex-row bg-blue-gradient text-[#adbbda]`}
@@ -145,18 +181,20 @@ export default function AddNewProperty() {
           // onSubmit={handleSubmit}
           className="flex flex-col lg:flex-row gap-8 overflow-y-auto no-scrollbar max-h-[80%]"
         >
-          <div className="flex flex-col gap-4 flex-1 lg:max-h-full lg:overflow-y-auto lg:no-scrollbar">
+          <div className="flex flex-col gap-4 flex-1 lg:max-h-full lg:overflow-y-auto lg:no-scrollbar lg:pb-5">
             <div className="w-full">
-              <div className="mb-3 text-sm text-second">First Name</div>
+              <div className="mb-3 text-sm text-second">Property Name</div>
               <label className="input input-bordered flex items-center gap-2 rounded-lg">
-                <img alt="id card" src={idImg} className="w-4" />
+                <img alt="id card" src={houseImg} className="w-4" />
                 <input
                   type="text"
-                  id="firstName"
+                  id="propertyName"
                   className="grow"
-                  placeholder="First Name"
-                  // defaultValue={formData.firstName || currentUser.firstName}
-                  // onChange={handleFormData}
+                  placeholder="Property Name"
+                  minLength="10"
+                  maxLength="70"
+                  defaultValue={formData.propertyName}
+                  onChange={handleChange}
                 />
               </label>
             </div>
@@ -168,8 +206,8 @@ export default function AddNewProperty() {
                 placeholder="Description"
                 id="description"
                 required
-                // onChange={handleChange}
-                value={formData.description}
+                onChange={handleChange}
+                defaultValue={formData.description}
               ></textarea>
             </div>
 
@@ -183,8 +221,8 @@ export default function AddNewProperty() {
                   className="grow"
                   id="address"
                   required
-                  // onChange={handleChange}
-                  value={formData.address}
+                  onChange={handleChange}
+                  defaultValue={formData.address}
                 />
               </label>
             </div>
@@ -194,8 +232,8 @@ export default function AddNewProperty() {
                   type="checkbox"
                   id="sale"
                   className="checkbox checkbox-warning rounded-lg "
-                  // onChange={handleChange}
-                  // checked={formData.type === "sale"}
+                  onChange={handleChange}
+                  checked={formData.type === "sale"}
                 />
                 <span>Sell</span>
               </div>
@@ -204,7 +242,7 @@ export default function AddNewProperty() {
                   type="checkbox"
                   id="rent"
                   className="checkbox checkbox-warning rounded-lg"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   checked={formData.type === "rent"}
                 />
                 <span>Rent</span>
@@ -214,7 +252,7 @@ export default function AddNewProperty() {
                   type="checkbox"
                   id="parking"
                   className="checkbox checkbox-warning rounded-lg"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   checked={formData.parking}
                 />
                 <span>Parking spot</span>
@@ -224,7 +262,7 @@ export default function AddNewProperty() {
                   type="checkbox"
                   id="furnished"
                   className="checkbox checkbox-warning rounded-lg"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   checked={formData.furnished}
                 />
                 <span>Furnished</span>
@@ -234,7 +272,7 @@ export default function AddNewProperty() {
                   type="checkbox"
                   id="offer"
                   className="checkbox checkbox-warning rounded-lg"
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   checked={formData.offer}
                 />
                 <span>Offer</span>
@@ -250,8 +288,8 @@ export default function AddNewProperty() {
                   max="10"
                   required
                   className="p-3 border border-gray-300 rounded-lg"
-                  // onChange={handleChange}
-                  value={formData.bedrooms}
+                  onChange={handleChange}
+                  defaultValue={formData.bedrooms}
                 />
                 <p>Beds</p>
               </div>
@@ -263,8 +301,8 @@ export default function AddNewProperty() {
                   max="10"
                   required
                   className="p-3 border border-gray-300 rounded-lg"
-                  // onChange={handleChange}
-                  value={formData.bathrooms}
+                  onChange={handleChange}
+                  defaultValue={formData.bathrooms}
                 />
                 <p>Baths</p>
               </div>
@@ -276,13 +314,13 @@ export default function AddNewProperty() {
                   max="10000000"
                   required
                   className="p-3 border border-gray-300 rounded-lg"
-                  // onChange={handleChange}
-                  value={formData.regularPrice}
+                  onChange={handleChange}
+                  defaultValue={formData.regularPrice}
                 />
                 <div className="flex flex-col items-center">
                   <p>Regular price</p>
                   {formData.type === "rent" && (
-                    <span className="text-xs">( / month)</span>
+                    <span className="text-xs">( &#x20b9; / month)</span>
                   )}
                 </div>
               </div>
@@ -295,8 +333,8 @@ export default function AddNewProperty() {
                     max="10000000"
                     required
                     className="p-3 border border-gray-300 rounded-lg"
-                    //   onChange={handleChange}
-                    value={formData.discountPrice}
+                    onChange={handleChange}
+                    defaultValue={formData.discountPrice}
                   />
                   <div className="flex flex-col items-center">
                     <p>Discounted price</p>
