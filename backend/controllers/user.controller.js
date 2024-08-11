@@ -48,4 +48,17 @@ export default class UserController {
       next(error);
     }
   }
+
+  async getAllProperties(req, res, next) {
+    try {
+      if (req.params.id != req.user.userId)
+        return next(errorHandler(400, "You can delete only your own account"));
+
+      const properties = await this.userRepository.getAll(req.params.id);
+      return res.status(200).json(properties);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import Property from "../models/property.model.js";
 import User from "../models/user.model.js";
 
 export default class UserRepository {
@@ -44,6 +45,15 @@ export default class UserRepository {
   async findUserByIdAndDelete(id) {
     try {
       await User.findByIdAndDelete(id);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Something went wrong with database");
+    }
+  }
+
+  async getAll(id) {
+    try {
+      return await Property.find({ userRef: id });
     } catch (error) {
       console.log(error);
       throw new Error("Something went wrong with database");
