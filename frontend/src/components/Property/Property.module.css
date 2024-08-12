@@ -1,0 +1,8 @@
+.propertyBar {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.propertyBar:hover {
+  transform: scale(1.02);
+}
