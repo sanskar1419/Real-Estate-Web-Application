@@ -41,7 +41,44 @@ export default class PropertyController {
           errorHandler(401, "You are unauthorized to delete this property")
         );
 
+      await this.propertiesRepository.delete(req.params.id);
+
       return res.status(200).json({ message: "Successfully deleted" });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async updateProperty(req, res, next) {
+    try {
+      const property = await this.propertiesRepository.findById(req.params.id);
+      if (!property) return next(errorHandler(404, "Property not found"));
+
+      // console.log(
+      //   req.user.userId +
+      //     "  " +
+      //     property.userRef._id +
+      //     " " +
+      //     (req.user.userId !== property.userRef._id) +
+      //     " " +
+      //     (req.user.userId !== property.userRef.id)
+      // );
+
+      if (property.userRef.id !== req.user.userId)
+        return next(
+          errorHandler(401, "You are unauthorized to update this property")
+        );
+
+      const updatedProperty = await this.propertiesRepository.update(
+        req.params.id,
+        { ...req.body }
+      );
+
+      if (!updatedProperty)
+        return next(errorHandler(500, "Something Went Wrong"));
+
+      res.status(200).json(updatedProperty);
     } catch (error) {
       console.log(error);
       next(error);

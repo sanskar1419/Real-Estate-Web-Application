@@ -26,4 +26,14 @@ export default class PropertyRepository {
       throw new Error("Something Wrong with the database");
     }
   }
+
+  async update(id, data) {
+    try {
+      return await Property.findByIdAndUpdate(id, data, {
+        new: true,
+      });
+    } catch (error) {
+      throw new Error("Something wrong with the database");
+    }
+  }
 }

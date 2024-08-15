@@ -14,4 +14,8 @@ propertyRouter.delete("/delete/:id", verifyJwt, (req, res, next) => {
   propertyController.deleteProperty(req, res, next);
 });
 
+propertyRouter.post("/update/:id", verifyJwt, (req, res, next) => {
+  propertyController.updateProperty(req, res, next);
+});
+
 export default propertyRouter;
