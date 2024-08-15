@@ -18,4 +18,8 @@ propertyRouter.post("/update/:id", verifyJwt, (req, res, next) => {
   propertyController.updateProperty(req, res, next);
 });
 
+propertyRouter.get("/get-property/:id", (req, res, next) => {
+  propertyController.getProperty(req, res, next);
+});
+
 export default propertyRouter;

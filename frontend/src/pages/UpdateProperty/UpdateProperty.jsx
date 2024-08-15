@@ -51,7 +51,13 @@ export default function UpdateProperty() {
 
   useEffect(() => {
     const getProperty = async () => {
-      console.log(id);
+      const res = await fetch(`/api/properties/get-property/${id}`);
+      const data = await res.json();
+      if (data.success == false) {
+        dispatch(notificationAction.setError("Something Went Wrong"));
+        return;
+      }
+      setFormData({ ...data });
     };
     getProperty();
   }, []);
