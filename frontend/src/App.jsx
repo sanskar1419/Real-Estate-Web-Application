@@ -14,6 +14,7 @@ import Notification from "./components/Notifications/Notification.jsx";
 import { useSelector } from "react-redux";
 import { getCurrentUser } from "./redux/slices/user.slice.js";
 import AddNewProperty from "./pages/AddNewProperty/AddNewProperty.jsx";
+import UpdateProperty from "./pages/UpdateProperty/UpdateProperty.jsx";
 
 export default function App() {
   const currentUser = useSelector(getCurrentUser);
@@ -45,6 +46,10 @@ export default function App() {
         {
           path: "/create-property",
           element: currentUser ? <AddNewProperty /> : <Navigate to="/" />,
+        },
+        {
+          path: "/update-property/:id",
+          element: currentUser ? <UpdateProperty /> : <Navigate to="/" />,
         },
       ],
     },

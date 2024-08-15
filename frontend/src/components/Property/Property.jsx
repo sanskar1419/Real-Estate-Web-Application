@@ -117,12 +117,14 @@ export default function Property() {
                 >
                   Delete
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-outline btn-ghost btn-sm rounded-lg text-xs md:text-sm"
-                >
-                  Edit
-                </button>
+                <Link to={`/update-property/${img._id}`}>
+                  <button
+                    type="button"
+                    className="btn btn-outline btn-ghost btn-sm rounded-lg text-xs md:text-sm"
+                  >
+                    Edit
+                  </button>
+                </Link>
               </div>
             ))}
           </div>
