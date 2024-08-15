@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { notificationAction } from "../../redux/slices/notification.slice";
 import { getCurrentUser } from "../../redux/slices/user.slice";
 import { set } from "mongoose";
+import { Link } from "react-router-dom";
+import noPropertyImg from "../../assets/images/noProperty.png";
 
 export default function Property() {
   const dispatch = useDispatch();
@@ -47,9 +49,37 @@ export default function Property() {
         </div>
       )} */}
 
-      {userProperties.length == 0 ? (
-        <div></div>
-      ) : (
+      {showProperty && userProperties.length == 0 && (
+        <div className="flex lg:max-h-[95%] place-items-center third-color cursive text-[#adbbda] px-6 py-24 sm:py-32 lg:px-8 rounded-2xl shadow-inner shadow-black items-center justify-center">
+          <div className="text-center flex items-center justify-center flex-col">
+            <img alt="logo" src={noPropertyImg} className="w-[30%]" />
+            {/* <p className="text-base font-semibold text-indigo-600">404</p> */}
+            <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+              No Property Found
+            </h1>
+            <p className="mt-6 text-base leading-7 text-gray-900">
+              Sorry, we couldn’t find any property which are added by you.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Link
+                to="/create-property"
+                href="#"
+                className="rounded-md bg-slate-950 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Add New Property
+              </Link>
+              <p
+                className="text-sm font-semibold text-gray-900 cursor-pointer"
+                onClick={() => setShowProperty(false)}
+              >
+                Go Back <span aria-hidden="true">&rarr;</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showProperty && userProperties.length !== 0 && (
         <div className="flex items-center gap-3 w-full flex-col lg:max-h-full">
           <div className="text-2xl text-first">List of all properties</div>
           <div className="flex gap-2 w-full flex-col lg:max-h-[90%] overflow-y-auto no-scrollbar items-center">
