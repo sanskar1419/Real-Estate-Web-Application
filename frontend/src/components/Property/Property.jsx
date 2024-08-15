@@ -30,6 +30,30 @@ export default function Property() {
     }
   };
 
+  const handlePropertyDelete = async (id) => {
+    try {
+      const res = await fetch(`/api/properties/delete/${id}`, {
+        method: "DELETE",
+      });
+
+      const data = res.json();
+      if (data.success == false) {
+        dispatch(notificationAction.setError(data.message));
+        return;
+      }
+
+      setUserProperties((prev) =>
+        prev.filter((property) => property._id != id)
+      );
+
+      dispatch(
+        notificationAction.setMessage("😎😎Property Deleted Successfully😎😎")
+      );
+    } catch (error) {
+      dispatch(notificationAction.setError(error.message));
+    }
+  };
+
   return (
     <div className="w-[90%] xl:w-[65%] lg:w-[55%] md:w-[80%] cursive lg:max-h-full text-[#adbbda] flex flex-col relative">
       {!showProperty && (
@@ -87,10 +111,16 @@ export default function Property() {
                 <Link className="w-[70%] sm:block truncate hover:underline">
                   {img.propertyName}
                 </Link>
-                <button className="btn btn-outline btn-ghost btn-sm rounded-lg text-xs md:text-sm">
+                <button
+                  className="btn btn-outline btn-ghost btn-sm rounded-lg text-xs md:text-sm"
+                  onClick={() => handlePropertyDelete(img._id)}
+                >
                   Delete
                 </button>
-                <button className="btn btn-outline btn-ghost btn-sm rounded-lg text-xs md:text-sm">
+                <button
+                  type="button"
+                  className="btn btn-outline btn-ghost btn-sm rounded-lg text-xs md:text-sm"
+                >
                   Edit
                 </button>
               </div>
