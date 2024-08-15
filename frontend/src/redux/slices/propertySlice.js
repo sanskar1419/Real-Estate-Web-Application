@@ -17,6 +17,9 @@ export const propertySlice = createSlice({
     addError: (state, action) => {
       state.loading = false;
     },
+    updateSuccess: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 

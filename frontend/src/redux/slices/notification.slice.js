@@ -55,6 +55,9 @@ const notificationSlice = createSlice({
       })
       .addCase(propertyActions.addError, (state, action) => {
         state.error = action.payload;
+      })
+      .addCase(propertyActions.updateSuccess, (state, action) => {
+        state.message = "🙌🙌Property updated successfully🙌🙌";
       });
   },
 });

@@ -191,7 +191,7 @@ export default function UpdateProperty() {
         );
 
       dispatch(propertyActions.addStart());
-      const res = await fetch("/api/properties/create", {
+      const res = await fetch(`/api/properties/update/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -204,7 +204,7 @@ export default function UpdateProperty() {
         dispatch(propertyActions.addError(data.message));
         return;
       }
-      dispatch(propertyActions.addSuccess(data));
+      dispatch(propertyActions.updateSuccess(data));
       navigate(`/create-property/${data._id}`);
     } catch (error) {
       dispatch(propertyActions.addError(error.message));
