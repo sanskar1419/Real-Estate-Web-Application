@@ -8,13 +8,40 @@ export default class PropertyController {
 
   async createNewProperty(req, res, next) {
     try {
-      console.log(req.body);
       const property = await this.propertiesRepository.create({
         ...req.body,
         userRef: req.user.userId,
       });
       if (!property) next(errorHandler("400", "Unable add new property"));
       return res.status(201).json(property);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  async deleteProperty(req, res, next) {
+    try {
+      const property = await this.propertiesRepository.findById(req.params.id);
+      console.log(property);
+      if (!property) return next(errorHandler(404, "Property doesn't exist"));
+
+      // console.log(
+      //   req.user.userId +
+      //     "  " +
+      //     property.userRef._id +
+      //     " " +
+      //     (req.user.userId !== property.userRef._id) +
+      //     " " +
+      //     (req.user.userId !== property.userRef.id)
+      // );
+
+      if (req.user.userId !== property.userRef.id)
+        return next(
+          errorHandler(401, "You are unauthorized to delete this property")
+        );
+
+      return res.status(200).json({ message: "Successfully deleted" });
     } catch (error) {
       console.log(error);
       next(error);
