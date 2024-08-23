@@ -108,7 +108,10 @@ export default function Property() {
                   src={img.imageUrls[0]}
                   className="w-10 h-10 md:w-14 md:h-14  sm:w-12 sm:h-12 rounded-full"
                 />
-                <Link className="w-[70%] sm:block truncate hover:underline">
+                <Link
+                  to={`/create-property/${img._id}`}
+                  className="w-[70%] sm:block truncate hover:underline"
+                >
                   {img.propertyName}
                 </Link>
                 <button
