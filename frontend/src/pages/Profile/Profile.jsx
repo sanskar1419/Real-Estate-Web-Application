@@ -143,14 +143,14 @@ export default function Profile() {
     <div
       className={`w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex justify-center sm:min-h-[90vh] lg:flex-row bg-blue-gradient text-[#adbbda]`}
     >
-      <div className=" bg-[url('./assets/images/background5.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
+      <div className="bg-[url('./assets/images/background5.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
       <div className="w-[100%] flex flex-wrap  justify-around lg:justify-start gap-5 overflow-y-auto no-scrollbar p-7 flex-row lg:flex-col relative">
         {showMenu && (
           <div className="fixed top-[4.2rem] left-0 z-[999]">
             <SettingMenu setEdit={setEdit} />
           </div>
         )}
-        <div className="w-[90%] xl:w-[30%] lg:w-[40%] md:w-[80%] sm:w-[80%]  rounded-2xl third-color shadow-inner shadow-black flex flex-col justify-center items-center gap-1 p-3">
+        <div className="w-[90%] xl:w-[30%] lg:w-[40%] md:w-[80%] sm:w-[80%]  rounded-2xl third-color shadow-inner shadow-black flex flex-col justify-center items-center gap-1 pt-3 pb-2">
           <input
             type="file"
             accept="image/*"
@@ -169,7 +169,9 @@ export default function Profile() {
           </div>
           <p className="text-xs font-bold self-center text-center mt-3 z-30">
             {fileUploadError ? (
-              <span className="text-fourth">{fileUploadError}</span>
+              <span className="text-fourth" style={{ fontSize: "0.5rem" }}>
+                {fileUploadError}
+              </span>
             ) : fileUploadPercentage > 0 && fileUploadPercentage < 100 ? (
               <span className="text-[#adbbda]">{`Uploading ${fileUploadPercentage}%`}</span>
             ) : fileUploadPercentage === 100 && fileUploadSuccess ? (
@@ -186,21 +188,21 @@ export default function Profile() {
           </div>
         </div>
         <div className="w-[90%] xl:w-[30%] lg:w-[40%] md:w-[80%] sm:w-[80%] rounded-2xl third-color shadow-inner shadow-black bg-blend-darken flex items-start justify-center cursive flex-wrap p-4">
-          <div className="w-[50%] mb-3">
+          <div className="w-[50%] mb-1">
             <div className="text-xs font-semibold">User Name</div>
             <div className="text-sm">{currentUser.username}</div>
           </div>
-          <div className="w-[50%] mb-3">
+          <div className="w-[50%] mb-1">
             <div className="text-xs font-semibold">Date Of Birth</div>
             <div className="text-sm">{currentUser.dob || "dd-mm-yy"}</div>
           </div>
-          <div className="w-[50%] mb-3">
+          <div className="w-[50%] mb-1">
             <div className="text-xs font-semibold">Mobile Number</div>
             <div className="text-sm mb-4">
               {currentUser.phoneNumber || "1234564789"}
             </div>
           </div>
-          <div className="w-[50%] mb-3">
+          <div className="w-[50%] mb-1">
             <div className="text-xs font-semibold">Address</div>
             <div className="text-sm">
               {currentUser.address || "Place, City Country"}
