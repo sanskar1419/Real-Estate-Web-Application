@@ -71,7 +71,7 @@ export default function SignIn() {
   /* Returning the JSX */
   return (
     <>
-      <div className=" w-full min-h-[88vh] lg:min-h-[88vh] h-[88vh] relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-[#adbbda]">
+      <div className=" w-full h-screen relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar bg-blue-gradient text-[#adbbda]">
         <div className=" bg-[url('./assets/images/background2.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div>
         <div className=" p-8 flex-col lg:w-[50%] lg:p-12">
           <div className=" uppercase font-bold text-sm mb-3 w-full flex justify-start">

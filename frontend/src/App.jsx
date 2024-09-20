@@ -16,6 +16,7 @@ import { getCurrentUser } from "./redux/slices/user.slice.js";
 import AddNewProperty from "./pages/AddNewProperty/AddNewProperty.jsx";
 import UpdateProperty from "./pages/UpdateProperty/UpdateProperty.jsx";
 import PropertyDetail from "./pages/PropertyDetail/PropertyDetail.jsx";
+import ButtonGradient from "./assets/svg/ButtonGradient.jsx";
 
 export default function App() {
   const currentUser = useSelector(getCurrentUser);
@@ -64,6 +65,7 @@ export default function App() {
     <>
       <RouterProvider router={router} />
       <Notification />
+      <ButtonGradient />
     </>
   );
 }

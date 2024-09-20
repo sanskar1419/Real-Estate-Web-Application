@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./Logo.module.css";
+import { brainwaveSymbol } from "../../assets";
 
 export default function Logo() {
   const [charArray, setCharArray] = useState([]);
   useEffect(() => {
-    const text = "Dwellio E-state";
+    const text = "Pinnacle Realty";
     const result = text.split("");
     setCharArray([...result]);
     // const text = document.getElementById("text");
@@ -18,10 +19,10 @@ export default function Logo() {
   }, []);
   return (
     <div
-      className={`${styles.logo} w-[20%] md:w-[10%] cursor-pointer text-xs font-medium`}
+      className={`${styles.logo} cursor-pointer text-xs font-medium`}
       id="circle"
     >
-      <div className=" text-normal">DE</div>
+      <img src={brainwaveSymbol} alt="brainwave" className=" p-2" />
       <div className={`${styles.text}`}>
         <p id="text">
           {charArray.map((char, i) => (
