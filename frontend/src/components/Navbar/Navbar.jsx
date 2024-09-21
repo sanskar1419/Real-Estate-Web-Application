@@ -256,7 +256,7 @@ export default function Navbar() {
 
                 <span>Register</span>
               </NavLink>
-              <Button>
+              <Button className="hidden lg:flex">
                 <NavLink
                   to="/sign-in"
                   className={`${styles.navButton} cursor-pointer hidden lg:flex items-center gap-1 justify-center cursive  transition-colors hover:text-[#AC6AFF]`}

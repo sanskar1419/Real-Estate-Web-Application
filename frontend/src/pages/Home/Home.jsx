@@ -7,6 +7,10 @@ import {
   notificationAction,
 } from "../../redux/slices/notification.slice";
 import toast from "react-hot-toast";
+import Section from "../../components/Section";
+import Button from "../../components/Button/Button";
+import { curve, heroBackground, robot } from "../../assets";
+import Hero from "../../components/Hero";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -25,11 +29,8 @@ export default function Home() {
   }, [message, error]);
 
   return (
-    <div
-      className={`w-full h-screen relative shadow-2xl shadow-black-100 flex items-center flex-col sm:min-h-[90vh] lg:flex-row overflow-y-auto no-scrollbar ${styles.homeContainer}`}
-    >
-      {/* <div className=" bg-[url('./assets/images/background8.jpg')] opacity-25 w-full h-full absolute z-[-10] bg-cover bg-center"></div> */}
-      <div />
+    <div className="pt-[4.75rem] lg:pt-[5.25rem] h-screen overflow-y-auto overflow-x-hidden no-scrollbar">
+      <Hero />
     </div>
   );
 }
