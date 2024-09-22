@@ -1,4 +1,3 @@
-import { companyLogos } from "../../constants";
 import slider1Img from "../../assets/slider/logo1.svg";
 import slider2Img from "../../assets/slider/logo2.svg";
 import slider3Img from "../../assets/slider/logo3.svg";
@@ -19,12 +18,16 @@ import property6 from "../../assets/slider/property6.jpg";
 import property7 from "../../assets/slider/property7.jpg";
 import property8 from "../../assets/slider/property8.jpg";
 import property9 from "../../assets/slider/property9.jpg";
+import property10 from "../../assets/slider/property10.jpg";
+import property11 from "../../assets/slider/property11.jpg";
+import property12 from "../../assets/slider/property12.jpg";
+import property13 from "../../assets/slider/property13.jpg";
 
 const CompanyLogos = ({ className }) => {
   return (
     <div className={className}>
       <h5 className="tagline mb-10 text-center text-n-1/50">
-        Helping people create beautiful content at
+        Helping people create living peaceful life at
       </h5>
 
       <div
@@ -154,6 +157,30 @@ const CompanyLogos = ({ className }) => {
             style={{ "--position": 9 }}
           >
             <img src={property9} alt="" />
+          </div>
+          <div
+            className={`${styles.item} scale-[0.8] md:scale-[1]`}
+            style={{ "--position": 10 }}
+          >
+            <img src={property10} alt="" />
+          </div>
+          <div
+            className={`${styles.item} scale-[0.8] md:scale-[1]`}
+            style={{ "--position": 11 }}
+          >
+            <img src={property11} alt="" />
+          </div>
+          <div
+            className={`${styles.item} scale-[0.8] md:scale-[1]`}
+            style={{ "--position": 12 }}
+          >
+            <img src={property12} alt="" />
+          </div>
+          <div
+            className={`${styles.item} scale-[0.8] md:scale-[1]`}
+            style={{ "--position": 13 }}
+          >
+            <img src={property13} alt="" />
           </div>
         </div>
       </div>
